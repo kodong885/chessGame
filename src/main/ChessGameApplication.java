@@ -1,41 +1,31 @@
 package main;
 
-import domain.ChessBoard;
+import Utils.GetUserInput;
+import Utils.PrintLoadingString;
 import service.ServiceChessGame;
-import utils.GetInput;
-import utils.PrintLoadingString;
 
 import java.util.Random;
 import java.util.Scanner;
 
 public class ChessGameApplication {
+
     public static void main(String[] args) {
 
-        ChessBoard chessBoard = new ChessBoard();
-        ServiceChessGame serviceChessGame = new ServiceChessGame();
-        GetInput getInput = new GetInput();
         Scanner scanner = new Scanner(System.in);
+        GetUserInput getUserInput = new GetUserInput();
         PrintLoadingString printLoadingString = new PrintLoadingString();
         Random random = new Random();
+        ServiceChessGame serviceChessGame = new ServiceChessGame();
+
 
         Console console = new Console();
-        console.startRunning(
-                chessBoard,
-                serviceChessGame,
-                getInput,
+        console.startGame(
                 scanner,
+                getUserInput,
                 printLoadingString,
-                random
+                random,
+                serviceChessGame
         );
+
     }
 }
-
-// < chessGame >
-//  Pawn → ●
-//  Rook → ▮
-//  Queen → ※
-//  King → ★
-//  Bishop → ♠
-//  Knight → £
-//  the empty place → □
-//  telling an available place user can put piece → ▨

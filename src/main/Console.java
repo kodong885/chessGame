@@ -1,75 +1,80 @@
 package main;
 
+import Utils.GetUserInput;
+import Utils.PrintLoadingString;
 import domain.ChessBoard;
+import domain.ChessPiece;
 import service.ServiceChessGame;
-import utils.GetInput;
-import utils.PrintLoadingString;
 
 import java.util.Random;
 import java.util.Scanner;
 
-import static java.lang.System.lineSeparator;
-
-
 public class Console {
-
-    public void startRunning(ChessBoard chessBoard,
-                             ServiceChessGame serviceChessGame,
-                             GetInput getInput,
-                             Scanner scanner,
-                             PrintLoadingString printLoadingString,
-                             Random random)
-    {
+    public void startGame(
+            Scanner scanner,
+            GetUserInput getUserInput,
+            PrintLoadingString printLoadingString,
+            Random random,
+            ServiceChessGame serviceChessGame
+    ) {
         String startMessage =
-                "------------ Ko-ChessGame is On ------------" +
-                        lineSeparator() +
+                "< ------------ Ko-ChessGame is On ------------> " +
+                        System.lineSeparator() +
                         "● Before start this game, you should set user name!";
         System.out.println(startMessage);
-        String player1 = getInput.inputPlayer1Name(scanner);
-        String player2 = getInput.inputPlayer2Name(scanner);
-        chessBoard.setPlayer1Name(player1);
-        chessBoard.setPlayer2Name(player2);
+
+        // set player name;
+        System.out.println("● Please enter user name here");
+        String player1Name = getUserInput.inputUserName(scanner);
+        String player2Name = getUserInput.inputUserName(scanner);
+        ChessBoard chessBoard = new ChessBoard(player1Name, player2Name); // initialize chessBoard
         chessBoard.printChessBoard();
 
         System.out.println("● Who goes first ?");
         printLoadingString.PrintLoadingString();
-
-        Integer gameTurn = random.nextInt(2) + 1; // a random number of 0 or 1;
-        if (gameTurn % 2 == 1) {
-            System.out.println(String.format("▶ '%s'(player1) will attack first !", player1));
+        int gameTurn = random.nextInt(2) + 1; // a random number of 1 or 2;
+        if (gameTurn == 1 ) {
+            System.out.println(String.format("▶ '%s'(player1) will attack first !", player1Name));
             System.out.println("● select piece ( ex → a/7 ) >>");
-            String[] currentPiecePosition = getInput.inputChessPiecePosition(scanner); // get a piece selected!
-            serviceChessGame.showWherePieceMove(
-                            currentPiecePosition,
-                            chessBoard
-            ); // show where currentPiece can move
-            System.out.println("● Where do you want to move?");
-            System.out.println("● select position ( ex → a/7 ) >>");
-            String[] putPiecePosition = getInput.inputChessPiecePosition(scanner);
-            serviceChessGame.attack(
-                    putPiecePosition,
-                    currentPiecePosition,
-                    chessBoard
-            );
-
-
-
-        } else {
-            System.out.println(String.format("▶ '%s'(player2) will attack first !", player2));
-            System.out.println("● select piece ( ex → a/7 ) >>");
-        }
-        Boolean isRunning = true;
-        while (isRunning) {
-            gameTurn ++;
-            if (gameTurn % 2 == 1) {
-                // player 2's turn
-
-            } else {
-                // player 1's turn
+            ChessPiece currentPiece;
+            while (true) {
+                currentPiece = chessBoard.getCurrentPiece(
+                        getUserInput.selectCurrentPiece(scanner)
+                );
+                if (serviceChessGame.checkCurrentPieceCanMove(currentPiece)) {
+                    System.out.println("What you selected is ~~");
+                    break;
+                } else {
+                    System.out.println("● This piece(%s) can't move anywhere !");
+                    System.out.println("● Please try again! ");
+                }
             }
-            System.out.println();
+
+            System.out.println("● Where do you want to move your(%s) piece? ");
+            System.out.println("● select piece ( ex → a/7 ) >>");
+            String[] putPiecePosition;
+            while (true) {
+                putPiecePosition = getUserInput.enterPutPiecePosition(scanner);
+                if (serviceChessGame.checkPutPieceCanMoveHere(putPiecePosition, currentPiece)) {
+                    break;
+                } else {
+                    System.out.println("● This piece(%s) can't move here(%s) !");
+                    System.out.println("● Please try again !");
+                }
+            }
+            serviceChessGame.attack(currentPiece, putPiecePosition);
+        } else {
 
         }
+
+        while (true) {
+
+        }
+
+
+
 
     }
+
+
 }
