@@ -230,14 +230,13 @@ public class ChessBoard {
     }
 
     public ChessPiece getPiece(Integer piecePositionX, Integer piecePositionY ) {
-        // add a case when these value taken are out of chess Board; // um.... what should I do...?
         return chessBoard[piecePositionY][piecePositionX];
     }
 
     public Boolean checkPieceAreSurroundedWithSameColor(Integer surroundingPiecePositionX,
                                                         Integer surroundingPiecePositionY,
                                                         ChessPiece currentPiece
-    ) {
+    ) { // this only used in the check currenPieceCanMove method in ServiceChessGame;
         if (
                 surroundingPiecePositionX < 0 || surroundingPiecePositionX > 7
                 ||  surroundingPiecePositionY < 0 || surroundingPiecePositionY > 7
@@ -256,6 +255,29 @@ public class ChessBoard {
             }
         }
     }
+
+    public Boolean checkPutPiecePositionInOneDirection(
+            Integer currentPiecePositionX,
+            Integer currentPiecePositionY,
+            Integer putPiecePositionX,
+            Integer putPiecePositionY,
+            ChessPiece currentPiece
+    ) {
+
+        // Queen, Rook, Bishop
+        if (currentPiece.getColor().equals("Queen")) {
+            
+
+
+        } else if (currentPiece.getColor().equals("Rook")) {
+
+        } else if (currentPiece.getColor().equals("Queen")) {
+
+        } else
+
+    }
+
+
 }
 
 

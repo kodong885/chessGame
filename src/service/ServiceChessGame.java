@@ -366,7 +366,18 @@ public class ServiceChessGame {
             case "Queen" :
                 // Queen이 갈 수 없는 position일 경우 → false
                 // Queen이 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
-                
+                // ★★★★ queen은 어떻게 해야하지....??? !!!!!!
+                // ---------
+                // 가로 / 세로 / 왼쪽 / 오른쪽 / 대각선(4방향) 방향 square에
+                // putPiecePosition이 위치(or 연산자 사용) → true;
+
+                chessBoard.checkPutPiecePositionInOneDirection(
+                        currentPiece.getCurrentPositionX(),
+                        currentPiece.getCurrentPositionY(),
+                        putPiecePositionX,
+                        putPiecePositionY,
+                        currentPiece
+                );
                 break;
 
             case "Rook" :
