@@ -38,6 +38,7 @@ abstract public class ChessPiece {
         return this.color;
     }
 
+    abstract public void attack();
 
 
     // 잠시만 주석처리....... abstract void public attack(); // implement this!!!

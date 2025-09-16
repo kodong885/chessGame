@@ -357,12 +357,6 @@ public class ServiceChessGame {
                 }
                 break;
 
-            case "King" :
-                // King이 갈 수 없는 position일 경우 → false
-                // King이 갈 수 있는 position이지만, 아군 piece가 있는 경우
-                // + 해당 position으로 이동하면 capture 당할 수 있음 (false)
-                break;
-
             case "Queen" :
                 // Queen이 갈 수 없는 position일 경우 → false
                 // Queen이 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
@@ -370,29 +364,108 @@ public class ServiceChessGame {
                 // ---------
                 // 가로 / 세로 / 왼쪽 / 오른쪽 / 대각선(4방향) 방향 square에
                 // putPiecePosition이 위치(or 연산자 사용) → true;
-
-                chessBoard.checkPutPiecePositionInOneDirection(
-                        currentPiece.getCurrentPositionX(),
-                        currentPiece.getCurrentPositionY(),
-                        putPiecePositionX,
-                        putPiecePositionY,
-                        currentPiece
-                );
+                if (
+                        chessBoard.checkPutPiecePositionOnOneDirection(
+                                currentPiece.getCurrentPositionX(),
+                                currentPiece.getCurrentPositionY(),
+                                putPiecePositionX,
+                                putPiecePositionY,
+                                currentPiece
+                        )
+                ) {
+                    // User can put piece here!
+                    return true;
+                } else {
+                    System.out.println("● You can't put piece(%s) here !");
+                    System.out.println("● please try again !");
+                    return false;
+                }
                 break;
 
             case "Rook" :
                 // Rook이 갈 수 없는 position일 경우 → false
                 // Rook이 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
-                break;
-
-            case "Knight" :
-                // Knight가 갈 수 없는 position일 경우 → false
-                // Knight가 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
+                if (
+                        chessBoard.checkPutPiecePositionOnOneDirection(
+                                currentPiece.getCurrentPositionX(),
+                                currentPiece.getCurrentPositionY(),
+                                putPiecePositionX,
+                                putPiecePositionY,
+                                currentPiece
+                        )
+                ) {
+                    // User can put piece here!
+                    return true;
+                } else {
+                    System.out.println("● You can't put piece(%s) here !");
+                    System.out.println("● please try again !");
+                    return false;
+                }
                 break;
 
             case "Bishop" :
                 // Bishop이 갈 수 없는 position일 경우 → false
                 // Bishop이 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
+                if (
+                        chessBoard.checkPutPiecePositionOnOneDirection(
+                                currentPiece.getCurrentPositionX(),
+                                currentPiece.getCurrentPositionY(),
+                                putPiecePositionX,
+                                putPiecePositionY,
+                                currentPiece
+                        )
+                ) {
+                    // User can put piece here!
+                    return true;
+                } else {
+                    System.out.println("● You can't put piece(%s) here !");
+                    System.out.println("● please try again !");
+                    return false;
+                }
+                break;
+
+            case "Knight" :
+                // Knight가 갈 수 없는 position일 경우 → false
+                // Knight가 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)\
+                if (
+                    // putPiecePosition is in the chessBoard && KnightPosition is in the chessBoard;
+                    // x + 2 / y - 1 → 이렇게 조건문을 복붙해서 여러개 만들빠엔
+                    // 조건문에서 그냥 한번에 처리하는게 낫지않을까? .........
+                        !chessBoard.checkPutPositionOutOfChess(
+                                putPiecePositionX,
+                                putPiecePositionY
+                        ) &&
+                                !chessBoard.checkPutPositionOutOfChess(
+                                        currentPiece.getCurrentPositionX() + 2,
+                                        currentPiece.getCurrentPositionY() - 1
+                                )
+                ) {
+                    if (
+                            !chessBoard.checkPutPiecePositionForKnight(
+                            currentPiece.getCurrentPositionX() + 2,
+                            currentPiece.getCurrentPositionY() - 1,
+                            putPiecePositionX,
+                            putPiecePositionY
+                            )
+                    ) {
+                        // There isn't on the same color piece here;
+                        return true;
+                    } else {
+                        // There's on the same color piece here;
+                        return false;
+                    }
+                } else {
+                    System.out.println("●  You can't put this piece(%s) here !");
+                    return false;
+                }
+
+
+                break;
+
+            case "King" :
+                // King이 갈 수 없는 position일 경우 → false
+                // King이 갈 수 있는 position이지만, 아군 piece가 있는 경우
+                // + 해당 position으로 이동하면 capture 당할 수 있음 (false)
                 break;
         }
 
