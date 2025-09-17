@@ -689,23 +689,38 @@ public class ChessBoard {
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
-            // 아군이 있는 경우(X), 체스 보드 판을 넘어선 경우(X);
         if (
-                !checkPutPieceHasSameColorWithCurrentPiece(
-                        knightPiecePositionX,
-                        knightPiecePositionY,
+                !checkPutPositionOutOfChess(
                         putPiecePositionX,
                         putPiecePositionY
+                ) && !checkPutPositionOutOfChess(
+                        knightPiecePositionX,
+                        knightPiecePositionY
                 )
         ) {
-            System.out.println("● There's on the same color piece here!");
-            return true;
+            // 아군이 있는 경우(X), 체스 보드 판을 넘어선 경우(X);
+            if (
+                    !checkPutPieceHasSameColorWithCurrentPiece(
+                            knightPiecePositionX,
+                            knightPiecePositionY,
+                            putPiecePositionX,
+                            putPiecePositionY
+                    )
+            ) {
+                System.out.println("● There isn't on the same color piece here!");
+                return true;
+            } else {
+                // There's a same color piece here;
+                return false;
+            }
+
         } else {
-            // There's a same color piece here;
+            System.out.println("●  You can't put this piece(%s) here !");
             return false;
         }
 
     }
+
 
     public Boolean checkPutPositionOutOfChess(
             Integer putPiecePositionX,
@@ -758,26 +773,30 @@ public class ChessBoard {
     }
 
     public Boolean checkPutPieceHasSameColorWithCurrentPiece(
-            Integer knightPiecePositionX,
-            Integer knightPiecePositionX,
+            Integer piecePositionX,
+            Integer piecePositionX,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        // check whether those are same color?!?!?!;
+
         if (
-
+                getPiece(piecePositionX, piecePositionY)
+                        .getColor()
+                        .equals(
+                                getPiece(putPiecePositionX, putPiecePositionY)
+                                        .getColor()
+                        )
         ) {
-            if (
-            ) {
-                return true;
-            } else {
-
-            }
-
-        } else {
-            // out of the chessBoard
             return true;
+        } else {
+            return false;
         }
-
     }
+
+
+
+
+
 
 }

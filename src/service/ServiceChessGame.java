@@ -41,10 +41,57 @@ public class ServiceChessGame {
                 break;
 
             case "King" :
-                // king 주변 space가 모두 공격 가능 지역일 경우
-
-
+                // king 주변 square에 같은 color piece가 쌓여있을때 → false;
+                // 그 외의 경우 → true;
+                if (
+                        chessBoard.checkPieceAreSurroundedWithSameColor(
+                                currentChessPieceX - 1,
+                                currentChessPieceY - 1,
+                                currentChessPiece
+                        ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX,
+                                        currentChessPieceY - 1,
+                                        currentChessPiece
+                                ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX + 1,
+                                        currentChessPieceY - 1,
+                                        currentChessPiece
+                                ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX - 1,
+                                        currentChessPieceY,
+                                        currentChessPiece
+                                ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX + 1,
+                                        currentChessPieceY,
+                                        currentChessPiece
+                                ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX - 1,
+                                        currentChessPieceY + 1,
+                                        currentChessPiece
+                                ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX,
+                                        currentChessPieceY + 1,
+                                        currentChessPiece
+                                ) &&
+                                chessBoard.checkPieceAreSurroundedWithSameColor(
+                                        currentChessPieceX + 1,
+                                        currentChessPieceY + 1,
+                                        currentChessPiece
+                                )
+                ) {
+                    // PieceAreSurroundedWithSameColor
+                    return false;
+                } else {
+                    return true;
+                }
                 break;
+
 
             case "Queen" :
                 // 1. 적군 piece 제한 없음!
@@ -415,6 +462,7 @@ public class ServiceChessGame {
                                 currentPiece
                         )
                 ) {
+                    //
                     // User can put piece here!
                     return true;
                 } else {
@@ -428,52 +476,75 @@ public class ServiceChessGame {
                 // Knight가 갈 수 없는 position일 경우 → false
                 // Knight가 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)\
                 if (
-                    // putPiecePosition is in the chessBoard && KnightPosition is in the chessBoard;
-                    // x + 2 / y - 1 → 이렇게 조건문을 복붙해서 여러개 만들빠엔
-                    // 조건문에서 그냥 한번에 처리하는게 낫지않을까? .........
-                        !chessBoard.checkPutPositionOutOfChess(
+                        !chessBoard.checkPutPiecePositionForKnight(
+                                currentPiece.getCurrentPositionX() + 2,
+                                currentPiece.getCurrentPositionY() - 1,
                                 putPiecePositionX,
                                 putPiecePositionY
-                        ) &&
-                                !chessBoard.checkPutPositionOutOfChess(
+                        ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
                                         currentPiece.getCurrentPositionX() + 2,
-                                        currentPiece.getCurrentPositionY() - 1
+                                        currentPiece.getCurrentPositionY() + 1,
+                                        putPiecePositionX,
+                                        putPiecePositionY
+                                ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
+                                        currentPiece.getCurrentPositionX() - 2,
+                                        currentPiece.getCurrentPositionY() - 1,
+                                        putPiecePositionX,
+                                        putPiecePositionY
+                                ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
+                                        currentPiece.getCurrentPositionX() - 2,
+                                        currentPiece.getCurrentPositionY() + 1,
+                                        putPiecePositionX,
+                                        putPiecePositionY
+                                ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
+                                        currentPiece.getCurrentPositionX() + 1,
+                                        currentPiece.getCurrentPositionY() - 2,
+                                        putPiecePositionX,
+                                        putPiecePositionY
+                                ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
+                                        currentPiece.getCurrentPositionX() + 1,
+                                        currentPiece.getCurrentPositionY() + 2,
+                                        putPiecePositionX,
+                                        putPiecePositionY
+                                ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
+                                        currentPiece.getCurrentPositionX() - 1,
+                                        currentPiece.getCurrentPositionY() - 2,
+                                        putPiecePositionX,
+                                        putPiecePositionY
+                                ) ||
+                                !chessBoard.checkPutPiecePositionForKnight(
+                                        currentPiece.getCurrentPositionX() - 1,
+                                        currentPiece.getCurrentPositionY() + 2,
+                                        putPiecePositionX,
+                                        putPiecePositionY
                                 )
                 ) {
-                    if (
-                            !chessBoard.checkPutPiecePositionForKnight(
-                            currentPiece.getCurrentPositionX() + 2,
-                            currentPiece.getCurrentPositionY() - 1,
-                            putPiecePositionX,
-                            putPiecePositionY
-                            )
-                    ) {
-                        // There isn't on the same color piece here;
-                        return true;
-                    } else {
-                        // There's on the same color piece here;
-                        return false;
-                    }
+                    return true;
+
                 } else {
-                    System.out.println("●  You can't put this piece(%s) here !");
                     return false;
                 }
-
 
                 break;
 
             case "King" :
-                // King이 갈 수 없는 position일 경우 → false
-                // King이 갈 수 있는 position이지만, 아군 piece가 있는 경우
-                // + 해당 position으로 이동하면 capture 당할 수 있음 (false)
+                // ( 다른 color piece가 공격 가능한 범위랑
+                // putKing 위치가 한 개라도 같은 경우 → false )
+
                 break;
         }
 
     }
 
-
     public void attack(ChessPiece currentPiece, String[] putPiecePosition) {
         // ...
     }
+
 
 }
