@@ -44,52 +44,18 @@ public class ServiceChessGame {
                 // king 주변 square에 같은 color piece가 쌓여있을때 → false;
                 // 그 외의 경우 → true;
                 if (
-                        chessBoard.checkPieceAreSurroundedWithSameColor(
-                                currentChessPieceX - 1,
-                                currentChessPieceY - 1,
-                                currentChessPiece
-                        ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                )
+                        !chessBoard.checkPieceAreSurroundedWithSameColor(
+                            currentChessPieceX,
+                            currentChessPieceY,
+                            currentChessPiece
+                        )
                 ) {
-                    // PieceAreSurroundedWithSameColor
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
+
+
                 break;
 
 
@@ -97,172 +63,75 @@ public class ServiceChessGame {
                 // 1. 적군 piece 제한 없음!
                 // 2. 아군 piece가 주변 space를 모두 둘어싸고 있을 때
                 if (
-                        // 아군 piece가 주변 space를 모두 둘어싸고 있을 때
-                        // 가로/세로
-                        chessBoard.checkPieceAreSurroundedWithSameColor(
-                                currentChessPieceX + 1,
+                        !chessBoard.checkPieceAreSurroundedWithSameColor(
+                                currentChessPieceX,
                                 currentChessPieceY,
                                 currentChessPiece
-                        ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                ) && // 대각선
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY + 1,
-                                                    currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                )
+                        )
                 ) {
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
+
                 break;
 
             case "Rook" :
                 // 적군 piece 제한 X
                 // Rook을 기준으로 가로 세로 모두 아군Piece가 둘어싸고 있을 때
                 if (
-                    // Rook을 기준으로 가로/세로 모두 아군Piece가 둘어싸고 있을 때
-                        chessBoard.checkPieceAreSurroundedWithSameColor(
-                                currentChessPieceX + 1,
+                        !chessBoard.checkPieceAreSurroundedWithSameColor(
+                                currentChessPieceX,
                                 currentChessPieceY,
                                 currentChessPiece
-                        ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX,
-                                        currentChessPieceY + 1,
-                                   currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                )
-
+                        )
                 ) {
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
+
                 break;
 
             case "Knight" :
                 // 적군 piece 제한 X
                 // Knight가 이동할 수 있는 지역에 모두 아군Piece가 둘러싸고 있을 때
                 // I'll fill this part!!!
+
                 if (
-                        chessBoard.checkPieceAreSurroundedWithSameColor(
-                                currentChessPieceX + 2,
-                                currentChessPieceY + 1,
+                        !chessBoard.checkPieceAreSurroundedWithSameColor(
+                                currentChessPieceX,
+                                currentChessPieceY,
                                 currentChessPiece
-                        ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 2,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 2,
-                                        currentChessPieceY +1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 2,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                ) && // 대각선
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY + 2,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY - 2,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY + 2,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY - 2,
-                                        currentChessPiece
-                                )
+                        )
                 ) {
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
+
                 break;
 
             case "Bishop" :
                 // 적군 piece제한 X
                 // Bishop이 이동할 수 있는 지역에 모두 아군Piece가 둘러싸고 있을 때
+
                 if (
-                        chessBoard.checkPieceAreSurroundedWithSameColor(
-                                currentChessPieceX + 1,
-                                currentChessPieceY + 1,
+                        !chessBoard.checkPieceAreSurroundedWithSameColor(
+                                currentChessPieceX,
+                                currentChessPieceY,
                                 currentChessPiece
-                        ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX + 1,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY + 1,
-                                        currentChessPiece
-                                ) &&
-                                chessBoard.checkPieceAreSurroundedWithSameColor(
-                                        currentChessPieceX - 1,
-                                        currentChessPieceY - 1,
-                                        currentChessPiece
-                                )
+                        )
                 ) {
-                    return false;
-                } else {
                     return true;
+                } else {
+                    return false;
                 }
+
                 break;
         }
     }
+
 
     public Boolean checkPutPieceCanMoveHere(String[] putPiecePosition,
                                             ChessPiece currentPiece,
