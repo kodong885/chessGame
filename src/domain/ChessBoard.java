@@ -1,5 +1,6 @@
 package domain;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 public class ChessBoard {
@@ -153,7 +154,7 @@ public class ChessBoard {
     }
 
     public void printChessBoard() {
-        System.out.println(String.format("     < %s > (Black)   ", player1Name));
+        System.out.println(String.format("     < '%s' > (Black)   ", player1Name));
         String chessBoardLine;
         Integer spaceNum;
         for (int i = 0; i < 8; i++) {
@@ -191,8 +192,7 @@ public class ChessBoard {
             }
             System.out.println(chessBoardLine);
         }
-        System.out.println(String.format("     < %s > (White)   ", player2Name));
-        System.out.println(Arrays.toString(chessBoard[7]));
+        System.out.println(String.format("     < '%s' > (White)   ", player2Name));
 
     }
 
@@ -224,7 +224,7 @@ public class ChessBoard {
                 currentPiecePositionX = 7;
                 break;
         }
-        int currentPiecePositionY = Integer.parseInt(currentPiecePosition[1]);
+        int currentPiecePositionY = Integer.parseInt(currentPiecePosition[1])-1;
         return chessBoard[currentPiecePositionY][currentPiecePositionX];
 
     }
@@ -248,13 +248,11 @@ public class ChessBoard {
         Boolean isDownPieceSameColorWithCurrentPiece = false; // ↓
         Boolean isSouthEastPieceSameColorWithCurrentPiece = false; // ↘
 
-
         switch (currentPiece.getPieceType()) {
-            case "King", "Queen" :
+            case "King", "Queen":
 
                 // set "isNorthWestPieceSameColorWithCurrentPiece"'s value; "↖"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX - 1,
                                 currentPiecePositionY - 1
@@ -280,7 +278,6 @@ public class ChessBoard {
 
                 // set "isUpPieceSameColorWithCurrentPiece"'s value; "↑"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX,
                                 currentPiecePositionY - 1
@@ -306,7 +303,6 @@ public class ChessBoard {
 
                 // set "isNorthEastPieceSameColorWithCurrentPiece"'s value; "↗"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX + 1,
                                 currentPiecePositionY - 1
@@ -332,7 +328,6 @@ public class ChessBoard {
 
                 // set "isLeftPieceSameColorWithCurrentPiece"'s value; "←"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX - 1,
                                 currentPiecePositionY
@@ -358,7 +353,6 @@ public class ChessBoard {
 
                 // set "isRightPieceSameColorWithCurrentPiece"'s value; "→"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX + 1,
                                 currentPiecePositionY
@@ -410,7 +404,6 @@ public class ChessBoard {
 
                 // set "isDownPieceSameColorWithCurrentPiece"'s value; "↓"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX,
                                 currentPiecePositionY + 1
@@ -436,7 +429,6 @@ public class ChessBoard {
 
                 // set "isSouthEastPieceSameColorWithCurrentPiece"'s value; "↘"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX + 1,
                                 currentPiecePositionY + 1
@@ -472,19 +464,15 @@ public class ChessBoard {
                                 isSouthEastPieceSameColorWithCurrentPiece
                 ) {
                     return true; // This Current Piece is surrounded with these same color piece;
-
                 } else {
                     return false; // This Current Piece isn't surrounded with these same color piece;
                 }
 
-                break;
 
-
-            case "Rook" :
+            case "Rook":
 
                 // set "isUpPieceSameColorWithCurrentPiece"'s value; "↑"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX,
                                 currentPiecePositionY - 1
@@ -510,7 +498,6 @@ public class ChessBoard {
 
                 // set "isDownPieceSameColorWithCurrentPiece"'s value; "↓"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX,
                                 currentPiecePositionY + 1
@@ -536,7 +523,6 @@ public class ChessBoard {
 
                 // set "isRightPieceSameColorWithCurrentPiece"'s value; "→"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX + 1,
                                 currentPiecePositionY
@@ -555,14 +541,12 @@ public class ChessBoard {
                         // different color;
                         isRightPieceSameColorWithCurrentPiece = false;
                     }
-
                 } else {
                     isRightPieceSameColorWithCurrentPiece = true;
                 }
 
                 // set "isLeftPieceSameColorWithCurrentPiece"'s value; "←"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX - 1,
                                 currentPiecePositionY
@@ -598,9 +582,7 @@ public class ChessBoard {
                     return false; // This Current Piece isn't surrounded with these same color piece;
                 }
 
-                break;
-
-            case "Knight" :
+            case "Knight":
 
                 if (
                         checkKnightIsSurroundedWithSameColor(
@@ -613,9 +595,8 @@ public class ChessBoard {
                 } else {
                     return false;
                 }
-                break;
 
-            case "Bishop" :
+            case "Bishop":
 
                 // set "isNorthEastPieceSameColorWithCurrentPiece"'s value; "↗"
                 if (
@@ -671,7 +652,6 @@ public class ChessBoard {
 
                 // set "isSouthEastPieceSameColorWithCurrentPiece"'s value; "↘"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX + 1,
                                 currentPiecePositionY + 1
@@ -697,7 +677,6 @@ public class ChessBoard {
 
                 // set "isSouthWestPieceSameColorWithCurrentPiece"'s value; "↙"
                 if (
-
                         !checkPiecePositionOutOfChess(
                                 currentPiecePositionX - 1,
                                 currentPiecePositionY + 1
@@ -711,32 +690,29 @@ public class ChessBoard {
                     ) {
                         // same color;
                         isSouthWestPieceSameColorWithCurrentPiece = true;
-
                     } else {
                         // different color;
                         isSouthWestPieceSameColorWithCurrentPiece = false;
                     }
-
                 } else {
                     isSouthWestPieceSameColorWithCurrentPiece = true;
                 }
 
 
-                 if (
-                         isNorthEastPieceSameColorWithCurrentPiece &&
-                                 isNorthWestPieceSameColorWithCurrentPiece &&
-                                 isSouthEastPieceSameColorWithCurrentPiece &&
-                                 isSouthWestPieceSameColorWithCurrentPiece
-                 ) {
-                     return true; // This Current Piece is surrounded with these same color piece;
-                 } else {
-                     return false; // This Current Piece isn't surrounded with these same color piece;
-                 }
-
-                break;
+                if (
+                        isNorthEastPieceSameColorWithCurrentPiece &&
+                                isNorthWestPieceSameColorWithCurrentPiece &&
+                                isSouthEastPieceSameColorWithCurrentPiece &&
+                                isSouthWestPieceSameColorWithCurrentPiece
+                ) {
+                    return true; // This Current Piece is surrounded with these same color piece;
+                } else {
+                    return false; // This Current Piece isn't surrounded with these same color piece;
+                }
 
         }
-
+        System.exit(1); // this statement never execute because at the switch statement, this method will end!!
+        return true;
     }
 
     public Boolean checkKnightIsSurroundedWithSameColor(
@@ -1410,6 +1386,7 @@ public class ChessBoard {
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        // 아군이 있는 경우(X), 체스 보드 판을 넘어선 경우(X);
         if (
                 !checkPiecePositionOutOfChess(
                         putPiecePositionX,
@@ -1419,9 +1396,8 @@ public class ChessBoard {
                         knightPiecePositionY
                 )
         ) {
-            // 아군이 있는 경우(X), 체스 보드 판을 넘어선 경우(X);
             if (
-                    !checkPutPieceHasSameColorWithCurrentPiece(
+                    !checkPutPieceHasSameColorWithCurrentKnight(
                             knightPiecePositionX,
                             knightPiecePositionY,
                             putPiecePositionX,
@@ -1493,18 +1469,14 @@ public class ChessBoard {
         }
     }
 
-
-    // ㅅㅂ 이 메서드는 왜 만든거지??????????
-    public Boolean checkPutPieceHasSameColorWithCurrentPiece(
-            Integer piecePositionX,
-            Integer piecePositionX,
+    public Boolean checkPutPieceHasSameColorWithCurrentKnight(
+            Integer knightPositionX,
+            Integer knightPositionY,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
-        // check whether those are same color?!?!?!;
-
         if (
-                getPiece(piecePositionX, piecePositionY)
+                getPiece(knightPositionX, knightPositionY)
                         .getColor()
                         .equals(
                                 getPiece(putPiecePositionX, putPiecePositionY)
@@ -1517,5 +1489,189 @@ public class ChessBoard {
         }
     }
 
+    public Boolean checkKingPieceCanPutHere(
 
+            Integer currentKingPositionX,
+            Integer currentKingPositionY,
+            Integer putPiecePositionX,
+            Integer putPiecePositionY
+    ) {
+        // 구현하기!!!!
+        // 다른 color의 Pawn, Queen, Rook, Bishop, Knight 이 capture할 수 있는 범위를 각각 구해야함!
+        // → 다른 color의 piece 각각 capture 할 수 있는 piece 리스트 만들어서, putPiecePosition이랑 비교......
+        // 리스트로 접근해야겠다.......
+        // ----------
+        // 일단은 놓는 위치(putPosition)에 same color piece가 위치하는지 판변하는 로직만 짜보자...!
+        String putPieceColor = getPiece(
+                putPiecePositionX, putPiecePositionY
+                ).getColor();
+
+        Boolean isXMinus1YMinus1PositionAvailable = false;
+        Boolean isYMinus1PositionAvailable = false;
+        Boolean isXPlus1YMinus1PositionAvailable = false;
+        Boolean isXMinus1PositionAvailable = false;
+        Boolean isXPlus1PositionAvailable = false;
+        Boolean isXMinus1YPlus1PositionAvailable = false;
+        Boolean isYPlus1PositionAvailable = false;
+        Boolean isXPlus1YPlus1PositionAvailable = false;
+
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX - 1,
+                        currentKingPositionY - 1
+                ) &&    // 안 && 다color → true;
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX - 1,
+                                        currentKingPositionY - 1
+                                ).getColor()
+                        )
+        ) {
+            isXMinus1YMinus1PositionAvailable = true;
+        } else {
+            isXMinus1YMinus1PositionAvailable = false;
+        }
+
+        // y-1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX,
+                        currentKingPositionY - 1
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX,
+                                        currentKingPositionY - 1
+                                ).getColor()
+                        )
+        ) {
+            isYMinus1PositionAvailable = true;
+        } else {
+            isYMinus1PositionAvailable = false;
+        }
+
+        // x+1 / y-1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX + 1,
+                        currentKingPositionY - 1
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX + 1,
+                                        currentKingPositionY - 1
+                                ).getColor()
+                        )
+        ) {
+            isXPlus1YMinus1PositionAvailable = true;
+        } else {
+            isXPlus1YMinus1PositionAvailable = false;
+        }
+
+        // x-1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX + 1,
+                        currentKingPositionY - 1
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX - 1,
+                                        currentKingPositionY
+                                ).getColor()
+                        )
+        ) {
+            isXMinus1PositionAvailable = true;
+        } else {
+            isXMinus1PositionAvailable = false;
+        }
+
+        // x+1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX + 1,
+                        currentKingPositionY
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX + 1,
+                                        currentKingPositionY
+                                ).getColor()
+                        )
+        ) {
+            isXPlus1PositionAvailable = true;
+        } else {
+            isXPlus1PositionAvailable = false;
+        }
+
+        // x-1 / y+1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX - 1,
+                        currentKingPositionY + 1
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX - 1,
+                                        currentKingPositionY + 1
+                                ).getColor()
+                        )
+        ) {
+            isXMinus1YPlus1PositionAvailable = true;
+        } else {
+            isXMinus1YPlus1PositionAvailable = false;
+        }
+
+        // y+1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX,
+                        currentKingPositionY + 1
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX,
+                                        currentKingPositionY + 1
+                                ).getColor()
+                        )
+        ) {
+            isYPlus1PositionAvailable = true;
+        } else {
+            isYPlus1PositionAvailable = false;
+        }
+
+        // x+1 / y+1
+        if (
+                !checkPiecePositionOutOfChess(
+                        currentKingPositionX + 1,
+                        currentKingPositionY + 1
+                ) &&
+                        !putPieceColor.equals(
+                                getPiece(
+                                        currentKingPositionX + 1,
+                                        currentKingPositionY + 1
+                                ).getColor()
+                        )
+        ) {
+            isXPlus1YPlus1PositionAvailable = true;
+        } else {
+            isXPlus1YPlus1PositionAvailable = false;
+        }
+
+
+        if (
+                isXMinus1YMinus1PositionAvailable ||
+                        isYMinus1PositionAvailable ||
+                        isXPlus1YMinus1PositionAvailable ||
+                        isXMinus1PositionAvailable ||
+                        isXPlus1PositionAvailable ||
+                        isXMinus1YPlus1PositionAvailable ||
+                        isYPlus1PositionAvailable ||
+                        isXPlus1YPlus1PositionAvailable
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

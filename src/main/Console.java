@@ -25,56 +25,70 @@ public class Console {
 
         // set player name;
         System.out.println("● Please enter user name here");
-        String player1Name = getUserInput.inputUserName(scanner);
-        String player2Name = getUserInput.inputUserName(scanner);
+        String player1Name = getUserInput.inputUserName(scanner, 1);
+        String player2Name = getUserInput.inputUserName(scanner, 2);
         ChessBoard chessBoard = new ChessBoard(player1Name, player2Name); // initialize chessBoard
         chessBoard.printChessBoard();
 
         System.out.println("● Who goes first ?");
         printLoadingString.PrintLoadingString();
+
         int gameTurn = random.nextInt(2) + 1; // a random number of 1 or 2;
-        if (gameTurn == 1 ) {
-            System.out.println(String.format("▶ '%s'(player1) will attack first !", player1Name));
-            System.out.println("● select piece ( ex → a/7 ) >>");
+        String attackUser = null;
+        chessBoard.printChessBoard();
+
+        while (true) {
+            gameTurn++;
+            if (gameTurn == 1) {
+                attackUser = "Black";
+            } else {
+                // gameTurn == 2;
+                attackUser = "White";
+            }
+
+            System.out.println(String.format("★ '%s'(%s) turn! ★", player1Name, attackUser));
             ChessPiece currentPiece;
             while (true) {
-                currentPiece = chessBoard.getCurrentPiece(
-                        getUserInput.selectCurrentPiece(scanner)
-                );
-                if (serviceChessGame.checkCurrentPieceCanMove(currentPiece)) {
-                    System.out.println("What you selected is ~~");
+                while (true) {
+                    System.out.println("● (select) >>");
+                    currentPiece = chessBoard.getCurrentPiece(
+                            getUserInput.selectCurrentPiece(scanner)
+                    );
+                    if (
+                            currentPiece.getColor().equals(attackUser)
+                    ) {
+                        break;
+                    } else {
+                        System.out.println(String.format("● %s(%s) is not your piece!", currentPiece.getPieceType(), currentPiece.getColor()));
+                        System.out.println("● Please try again! ");
+                    }
+                }
+
+                if (serviceChessGame.checkCurrentPieceCanMove(chessBoard, currentPiece)) {
+                    System.out.println(String.format("< %s(~/~) is selected >", currentPiece.getPieceType()));
                     break;
                 } else {
-                    System.out.println("● This piece(%s) can't move anywhere !");
-                    System.out.println("● Please try again! ");
+                    System.out.println(String.format("● This piece(%s) can't move anywhere !", currentPiece.getPieceType()));
+                    System.out.println("● Please select again! ");
                 }
             }
 
-            System.out.println("● Where do you want to move your(%s) piece? ");
-            System.out.println("● select piece ( ex → a/7 ) >>");
+            chessBoard.printChessBoard();
+            System.out.println("● (put) >>");
             String[] putPiecePosition;
             while (true) {
                 putPiecePosition = getUserInput.enterPutPiecePosition(scanner);
-                if (serviceChessGame.checkPutPieceCanMoveHere(putPiecePosition, currentPiece)) {
+                if (serviceChessGame.checkPutPieceCanMoveHere(putPiecePosition, currentPiece, chessBoard)) {
                     break;
                 } else {
                     System.out.println("● This piece(%s) can't move here(%s) !");
                     System.out.println("● Please try again !");
                 }
             }
-            serviceChessGame.attack(currentPiece, putPiecePosition);
-        } else {
+            serviceChessGame.attack(currentPiece, putPiecePosition, chessBoard);
+            chessBoard.printChessBoard();
 
         }
-
-        while (true) {
-
-        }
-
-
-
-
     }
-
 
 }

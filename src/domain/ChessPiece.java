@@ -1,10 +1,10 @@
 package domain;
 
-abstract public class ChessPiece {
+public class ChessPiece {
     protected Integer currentPositionX;
     protected Integer currentPositionY;
     protected String pieceType;
-    protected String color; // Black / White / Empty
+    protected String color; // "Black" / "White" / "Empty"
 
     public void setCurrentPositionX(Integer currentPositionX) {
         this.currentPositionX = currentPositionX;
@@ -37,10 +37,6 @@ abstract public class ChessPiece {
     public String getColor() {
         return this.color;
     }
-
-    abstract public void attack();
-
-
     // 잠시만 주석처리....... abstract void public attack(); // implement this!!!
 
 }
