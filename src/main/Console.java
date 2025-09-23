@@ -28,9 +28,7 @@ public class Console {
         String player1Name = getUserInput.inputUserName(scanner, 1);
         String player2Name = getUserInput.inputUserName(scanner, 2);
         ChessBoard chessBoard = new ChessBoard(player1Name, player2Name); // initialize chessBoard
-        chessBoard.printChessBoard();
 
-        System.out.println("● Who goes first ?");
         printLoadingString.PrintLoadingString();
 
         int gameTurn = random.nextInt(2) + 1; // a random number of 1 or 2;
@@ -39,10 +37,9 @@ public class Console {
 
         while (true) {
             gameTurn++;
-            if (gameTurn == 1) {
+            if (gameTurn % 2 == 1) {
                 attackUser = "Black";
             } else {
-                // gameTurn == 2;
                 attackUser = "White";
             }
 

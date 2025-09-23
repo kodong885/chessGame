@@ -130,7 +130,7 @@ public class ServiceChessGame {
                                             ChessBoard chessBoard
     ) {
         Integer putPiecePositionX = 100; // I set like this on purpose;
-        Integer putPiecePositionY = Integer.valueOf(putPiecePosition[1]);
+        Integer putPiecePositionY = Integer.valueOf(putPiecePosition[1]) - 1;
         switch (putPiecePosition[0]) {
             case "a" :
                 putPiecePositionX = 0;
@@ -179,40 +179,33 @@ public class ServiceChessGame {
                             || currentPiece.getCurrentPositionY().equals(6)
                     ) {
                         if (
-                            // ★ A case where a pawn moves more than 2 squares forward from its current position.
-                                currentPiece.getCurrentPositionY() - putPiecePositionY > 2
+                                currentPiece.getCurrentPositionY() - putPiecePositionY<= 2 &&
+                                        currentPiece.getCurrentPositionY() - putPiecePositionY  >= 1 &&
+                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
+                                        .getColor().equals(currentPiece.getColor()) &&
+                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            System.out.println("● Pawn moves more than 2 squares forward from it's current position !");
-                            System.out.println("● Please try again !");
-                            return false;
-                        } else if (
-                            // 1,2 칸 중, 입력한 position에 해당하는 piece의 color가 current piece와 같은지.
-                                chessBoard.getPiece(putPiecePositionX, putPiecePositionY-1)
-                                        .getColor().equals(currentPiece.getColor())
-                        ) {
-                            System.out.println("White is located here too!");
-                            return false;
-                        } else {
-
                             return true;
+                        } else {
+                            System.out.println("● You can't move here!");
+                            System.out.println("● Please try again!");
+                            return false;
                         }
+
                     } else {
                         // when Pawn is located at some line except line2 or line7;
                         // it can move 1 space;
                         if (
-                                currentPiece.getCurrentPositionY() - putPiecePositionY > 1
+                                currentPiece.getCurrentPositionY() - putPiecePositionY == 1 &&
+                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
+                                                .getColor().equals(currentPiece.getColor()) &&
+                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            System.out.println("● Pawn moves more than 1 squares forward from it's current position !");
-                            System.out.println("● Please try again !");
-                            return false;
-                        } else if (
-                                chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                        .getColor().equals(currentPiece.getColor())
-                        ) {
-                            System.out.println("● Pawn is already located here !");
-                            return false;
-                        } else {
                             return true;
+                        } else {
+                            System.out.println("● You can't move here!");
+                            System.out.println("● Please try again!");
+                            return false;
                         }
                     }
 
@@ -224,40 +217,34 @@ public class ServiceChessGame {
                                     || currentPiece.getCurrentPositionY().equals(6)
                     ) {
                         if (
-                            // ★ A case where a pawn moves more than 2 squares forward from its current position.
-                                putPiecePositionY - currentPiece.getCurrentPositionY() > 2
+                                putPiecePositionY - currentPiece.getCurrentPositionY() <= 2 &&
+                                        putPiecePositionY - currentPiece.getCurrentPositionY()  >= 1 &&
+                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
+                                                .getColor().equals(currentPiece.getColor()) &&
+                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            System.out.println("● Pawn moves more than 2 squares forward from it's current position !");
-                            System.out.println("● Please try again !");
-                            return false;
-                        } else if (
-                            // 1,2 칸 중, 입력한 position에 해당하는 piece의 color가 current piece와 같은지.
-                                chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                        .getColor().equals(currentPiece.getColor())
-                        ) {
-                            System.out.println("White is located here too!");
-                            return false;
-                        } else {
                             return true;
+                        } else {
+                            System.out.println("● You can't move here!");
+                            System.out.println("● Please try again!");
+                            return false;
                         }
                     } else {
                         // when Pawn is located at some line except line2 or line7;
                         // it can move 1 space;
                         if (
-                                putPiecePositionY - currentPiece.getCurrentPositionY() > 1
+                                putPiecePositionY - currentPiece.getCurrentPositionY() == 1 &&
+                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
+                                                .getColor().equals(currentPiece.getColor()) &&
+                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            System.out.println("● Pawn moves more than 1 squares forward from it's current position !");
-                            System.out.println("● Please try again !");
-                            return false;
-                        } else if (
-                                chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                        .getColor().equals(currentPiece.getColor())
-                        ) {
-                            System.out.println("● Pawn is already located here !");
-                            return false;
-                        } else {
                             return true;
+                        } else {
+                            System.out.println("● You can't move here!");
+                            System.out.println("● Please try again!");
+                            return false;
                         }
+
                     }
 
                 } else {
@@ -274,7 +261,7 @@ public class ServiceChessGame {
                 // 가로 / 세로 / 왼쪽 / 오른쪽 / 대각선(4방향) 방향 square에
                 // putPiecePosition이 위치(or 연산자 사용) → true;
                 if (
-                        chessBoard.checkPutPiecePositionOnOneDirection(
+                        chessBoard.checkPutPieceCanBePutOnPutPiecePosition(
                                 currentPiece.getCurrentPositionX(),
                                 currentPiece.getCurrentPositionY(),
                                 putPiecePositionX,
@@ -294,7 +281,7 @@ public class ServiceChessGame {
                 // Rook이 갈 수 없는 position일 경우 → false
                 // Rook이 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
                 if (
-                        chessBoard.checkPutPiecePositionOnOneDirection(
+                        chessBoard.checkPutPieceCanBePutOnPutPiecePosition(
                                 currentPiece.getCurrentPositionX(),
                                 currentPiece.getCurrentPositionY(),
                                 putPiecePositionX,
@@ -314,7 +301,7 @@ public class ServiceChessGame {
                 // Bishop이 갈 수 없는 position일 경우 → false
                 // Bishop이 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
                 if (
-                        chessBoard.checkPutPiecePositionOnOneDirection(
+                        chessBoard.checkPutPieceCanBePutOnPutPiecePosition(
                                 currentPiece.getCurrentPositionX(),
                                 currentPiece.getCurrentPositionY(),
                                 putPiecePositionX,

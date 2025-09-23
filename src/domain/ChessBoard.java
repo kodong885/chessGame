@@ -1,8 +1,5 @@
 package domain;
 
-import javax.swing.*;
-import java.util.Arrays;
-
 public class ChessBoard {
 
     ChessPiece[][] chessBoard = new ChessPiece[8][8];
@@ -954,7 +951,7 @@ public class ChessBoard {
 
     }
 
-    public Boolean checkPutPiecePositionOnOneDirection(
+    public Boolean checkPutPieceCanBePutOnPutPiecePosition(
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
             Integer putPiecePositionX,
@@ -965,49 +962,49 @@ public class ChessBoard {
         // Queen, Rook, Bishop
         if (currentPiece.getColor().equals("Queen")) {
             if (
-                    checkPutPiecePositionOnLeftDirection(
+                    checkPutPieceCanBePutOnLeftDirection(
                             currentPiecePositionX,
                             currentPiecePositionY,
                             putPiecePositionX,
                             putPiecePositionY
                     ) ||
-                            checkPutPiecePositionOnRightDirection(
+                            checkPutPieceCanBePutOnRightDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnUpDirection(
+                            checkPutPieceCanBePutOnUpDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnDownDirection(
+                            checkPutPieceCanBePutOnDownDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnNorthEastDirection(
+                            checkPutPieceCanBePutOnNorthEastDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnNorthWestDirection(
+                            checkPutPieceCanBePutOnNorthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnSouthEastDirection(
+                            checkPutPieceCanBePutOnSouthEastDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnSouthWestDirection(
+                            checkPutPieceCanBePutOnSouthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
@@ -1023,25 +1020,25 @@ public class ChessBoard {
 
         } else if (currentPiece.getColor().equals("Rook")) {
             if (
-                    checkPutPiecePositionOnLeftDirection(
+                    checkPutPieceCanBePutOnLeftDirection(
                             currentPiecePositionX,
                             currentPiecePositionY,
                             putPiecePositionX,
                             putPiecePositionY
                     ) ||
-                            checkPutPiecePositionOnRightDirection(
+                            checkPutPieceCanBePutOnRightDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnUpDirection(
+                            checkPutPieceCanBePutOnUpDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnDownDirection(
+                            checkPutPieceCanBePutOnDownDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
@@ -1057,25 +1054,25 @@ public class ChessBoard {
 
         } else if (currentPiece.getColor().equals("Queen")) {
             if (
-                    checkPutPiecePositionOnNorthEastDirection(
+                    checkPutPieceCanBePutOnNorthEastDirection(
                             currentPiecePositionX,
                             currentPiecePositionY,
                             putPiecePositionX,
                             putPiecePositionY
                     ) ||
-                            checkPutPiecePositionOnNorthWestDirection(
+                            checkPutPieceCanBePutOnNorthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnSouthEastDirection(
+                            checkPutPieceCanBePutOnSouthEastDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
-                            checkPutPiecePositionOnSouthWestDirection(
+                            checkPutPieceCanBePutOnSouthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
                                     putPiecePositionX,
@@ -1094,40 +1091,45 @@ public class ChessBoard {
         }
     }
 
-    public Boolean checkPutPiecePositionOnLeftDirection(
+    public Boolean checkPutPieceCanBePutOnLeftDirection(
             // ←
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean putPieceCanBePutOnLeftDirection = false;
         Boolean isLeftPositionXLessThan0;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionX --;
-            isLeftPositionXLessThan0 = currentPiecePositionX < 0;
+            piecePositionX --;
+            isLeftPositionXLessThan0 = piecePositionX < 0;
             if (!isLeftPositionXLessThan0) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
+                        // 색 상이 && X, Y좌표 동일...??????????
+                        !getPiece(piecePositionX, currentPiecePositionY)
                                 .getColor()
                                 .equals(
                                         getPiece(putPiecePositionX, putPiecePositionY)
                                                 .getColor()
-                                )
+                                ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    putPieceCanBePutOnLeftDirection = true;
                 } else {
                     // a "getPiece" is not the same as "putPiece";
                     continue;
                 }
             } else {
-                // isLeftPositionXLessThan0 → true;
-                return false;
+                break;
             }
-
         }
+        return putPieceCanBePutOnLeftDirection;
     }
 
-    public Boolean checkPutPiecePositionOnRightDirection(
+    public Boolean checkPutPieceCanBePutOnRightDirection(
             // →
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
@@ -1159,7 +1161,7 @@ public class ChessBoard {
         }
     }
 
-    public Boolean checkPutPiecePositionOnUpDirection(
+    public Boolean checkPutPieceCanBePutOnUpDirection(
             // ↑
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
@@ -1191,7 +1193,7 @@ public class ChessBoard {
         }
     }
 
-    public Boolean checkPutPiecePositionOnDownDirection(
+    public Boolean checkPutPieceCanBePutOnDownDirection(
             // ↓
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
@@ -1223,7 +1225,7 @@ public class ChessBoard {
         }
     }
 
-    public Boolean checkPutPiecePositionOnNorthWestDirection(
+    public Boolean checkPutPieceCanBePutOnNorthWestDirection(
             // ↖
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
@@ -1263,7 +1265,7 @@ public class ChessBoard {
 
     }
 
-    public Boolean checkPutPiecePositionOnNorthEastDirection(
+    public Boolean checkPutPieceCanBePutOnNorthEastDirection(
             // ↗
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
@@ -1302,7 +1304,7 @@ public class ChessBoard {
         }
     }
 
-    public Boolean checkPutPiecePositionOnSouthWestDirection(
+    public Boolean checkPutPieceCanBePutOnSouthWestDirection(
             // ↙
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
@@ -1341,7 +1343,7 @@ public class ChessBoard {
         }
     }
 
-    public Boolean checkPutPiecePositionOnSouthEastDirection(
+    public Boolean checkPutPieceCanBePutOnSouthEastDirection(
             // ↘
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,

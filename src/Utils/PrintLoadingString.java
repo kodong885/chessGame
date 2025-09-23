@@ -4,7 +4,7 @@ public class PrintLoadingString {
 
     public void PrintLoadingString() {
         String[] animation = {"|", "/", "-", "\\"};
-        int totalSeconds = 1; //
+        int totalSeconds = 2; //
         int interval = 100; // 0.1초마다 업데이트
         int loops = totalSeconds * 1000 / interval; // 총 반복 횟수
 
