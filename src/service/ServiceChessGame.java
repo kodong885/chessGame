@@ -398,7 +398,6 @@ public class ServiceChessGame {
     }
 
     public void attack(ChessPiece currentPiece, String[] putPiecePosition, ChessBoard chessBoard) {
-        // currentPiece, putPiecePosition을 각각 받기
 
         String currentPieceType = currentPiece.getPieceType();
         String currentPieceColor = currentPiece.getColor();

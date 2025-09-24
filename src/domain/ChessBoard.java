@@ -708,6 +708,7 @@ public class ChessBoard {
                 }
 
         }
+        System.out.println("ChessBoard.java:711");
         System.exit(1); // this statement never execute because at the switch statement, this method will end!!
         return true;
     }
@@ -960,53 +961,61 @@ public class ChessBoard {
     ) {
 
         // Queen, Rook, Bishop
-        if (currentPiece.getColor().equals("Queen")) {
+        if (currentPiece.getPieceType().equals("Queen")) {
             if (
                     checkPutPieceCanBePutOnLeftDirection(
                             currentPiecePositionX,
                             currentPiecePositionY,
+                            currentPiece.getColor(),
                             putPiecePositionX,
                             putPiecePositionY
                     ) ||
                             checkPutPieceCanBePutOnRightDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnUpDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnDownDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnNorthEastDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnNorthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnSouthEastDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnSouthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             )
@@ -1018,32 +1027,37 @@ public class ChessBoard {
             }
 
 
-        } else if (currentPiece.getColor().equals("Rook")) {
+        } else if (currentPiece.getPieceType().equals("Rook")) {
             if (
                     checkPutPieceCanBePutOnLeftDirection(
                             currentPiecePositionX,
                             currentPiecePositionY,
+                            currentPiece.getColor(),
                             putPiecePositionX,
                             putPiecePositionY
                     ) ||
                             checkPutPieceCanBePutOnRightDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnUpDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnDownDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             )
+                    // 이게 왜 false가 나오는거지.....?!?!?!??!?!???;
             ) {
                 return true;
             } else {
@@ -1051,30 +1065,33 @@ public class ChessBoard {
                 return false;
             }
 
-
-        } else if (currentPiece.getColor().equals("Queen")) {
+        } else if (currentPiece.getPieceType().equals("Queen")) {
             if (
                     checkPutPieceCanBePutOnNorthEastDirection(
                             currentPiecePositionX,
                             currentPiecePositionY,
+                            currentPiece.getColor(),
                             putPiecePositionX,
                             putPiecePositionY
                     ) ||
                             checkPutPieceCanBePutOnNorthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnSouthEastDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             ) ||
                             checkPutPieceCanBePutOnSouthWestDirection(
                                     currentPiecePositionX,
                                     currentPiecePositionY,
+                                    currentPiece.getColor(),
                                     putPiecePositionX,
                                     putPiecePositionY
                             )
@@ -1086,7 +1103,8 @@ public class ChessBoard {
             }
 
         } else {
-            System.exit(1); // when currentPiece's color is not a one of Bishop and Queen, Rook;
+            System.out.println("ChessBoard.java:1090");
+            System.exit(1); // when currentPiece's type is not a one of Bishop and Queen, Rook;
             return null;
         }
     }
@@ -1095,10 +1113,11 @@ public class ChessBoard {
             // ←
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
-        Boolean putPieceCanBePutOnLeftDirection = false;
+        Boolean isPutPieceCanBePutOnLeftDirection = false;
         Boolean isLeftPositionXLessThan0;
         Integer piecePositionX = currentPiecePositionX;
         Integer piecePositionY = currentPiecePositionY;
@@ -1107,161 +1126,164 @@ public class ChessBoard {
             isLeftPositionXLessThan0 = piecePositionX < 0;
             if (!isLeftPositionXLessThan0) {
                 if (
-                        // 색 상이 && X, Y좌표 동일...??????????
-                        !getPiece(piecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                ) &&
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
                                 piecePositionX.equals(putPiecePositionX) &&
                                 piecePositionY.equals(putPiecePositionY)
                 ) {
-                    putPieceCanBePutOnLeftDirection = true;
+                    isPutPieceCanBePutOnLeftDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
                 break;
             }
         }
-        return putPieceCanBePutOnLeftDirection;
+        return isPutPieceCanBePutOnLeftDirection;
     }
 
     public Boolean checkPutPieceCanBePutOnRightDirection(
             // →
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnRightDirection = false;
         Boolean isRightPositionXMoreThan7;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionX ++;
-            isRightPositionXMoreThan7 = currentPiecePositionX > 7;
+            piecePositionX ++;
+            isRightPositionXMoreThan7 = piecePositionX > 7;
             if (!isRightPositionXMoreThan7) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnRightDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isRightPositionXMoreThan7 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnRightDirection;
     }
 
     public Boolean checkPutPieceCanBePutOnUpDirection(
             // ↑
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnUpDirection = false;
         Boolean isUpPositionYLessThan0;
+        Integer piecePositionX = currentPiecePositionX; // ???????????;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionY --;
-            isUpPositionYLessThan0 = currentPiecePositionY < 0;
+            piecePositionY --;
+            isUpPositionYLessThan0 = piecePositionY < 0;
             if (!isUpPositionYLessThan0) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnUpDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isUpPositionYLessThan0 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnUpDirection;
     }
 
     public Boolean checkPutPieceCanBePutOnDownDirection(
             // ↓
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnDownDirection = false;
         Boolean isDownPositionYMoreThan7;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionY ++;
-            isDownPositionYMoreThan7 = currentPiecePositionY > 7;
+            piecePositionY ++;
+            isDownPositionYMoreThan7 = piecePositionY > 7;
             if (!isDownPositionYMoreThan7) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnDownDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isDownPositionYMoreThan7 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnDownDirection;
     }
 
     public Boolean checkPutPieceCanBePutOnNorthWestDirection(
             // ↖
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnNorthWestDirection = false;
         Boolean isLeftPositionXLessThan0;
-        Boolean isUpPositionYMoreThan7;
+        Boolean isUpPositionYLessThan0;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionX --;
-            currentPiecePositionY --;
-            isLeftPositionXLessThan0 = currentPiecePositionX < 0;
-            isUpPositionYMoreThan7 = currentPiecePositionY > 7;
+            piecePositionX --;
+            piecePositionY --;
+            isLeftPositionXLessThan0 = piecePositionX < 0;
+            isUpPositionYLessThan0 = piecePositionY < 0;
 
             if (
-                    isLeftPositionXLessThan0 &&
-                            isUpPositionYMoreThan7
+                    !isLeftPositionXLessThan0 &&
+                            !isUpPositionYLessThan0
             ) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnNorthWestDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isDownPositionYMoreThan7 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnNorthWestDirection;
 
     }
 
@@ -1269,118 +1291,125 @@ public class ChessBoard {
             // ↗
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnNorthEastDirection = false;
         Boolean isRightPositionXMoreThan7;
         Boolean isUpPositionYLessThan0;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionX ++;
-            currentPiecePositionY --;
-            isRightPositionXMoreThan7 = currentPiecePositionX > 7;
-            isUpPositionYLessThan0 = currentPiecePositionY < 0;
+            piecePositionX ++;
+            piecePositionY --;
+            isRightPositionXMoreThan7 = piecePositionX > 7;
+            isUpPositionYLessThan0 = piecePositionY < 0;
 
             if (
-                    isRightPositionXMoreThan7 &&
-                            isUpPositionYLessThan0
+                    !isRightPositionXMoreThan7 &&
+                            !isUpPositionYLessThan0
             ) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnNorthEastDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isDownPositionYMoreThan7 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnNorthEastDirection;
     }
 
     public Boolean checkPutPieceCanBePutOnSouthWestDirection(
             // ↙
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnSouthWestDirection = false;
         Boolean isLeftPositionLessThan0;
         Boolean isDownPositionMoreThan7;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionX --;
-            currentPiecePositionY ++;
-            isLeftPositionLessThan0 = currentPiecePositionX < 0;
-            isDownPositionMoreThan7 = currentPiecePositionY > 7;
+            piecePositionX --;
+            piecePositionY ++;
+            isLeftPositionLessThan0 = piecePositionX < 0;
+            isDownPositionMoreThan7 = piecePositionY > 7;
 
             if (
-                    isLeftPositionLessThan0 &&
-                            isDownPositionMoreThan7
+                    !isLeftPositionLessThan0 &&
+                            !isDownPositionMoreThan7
             ) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnSouthWestDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isDownPositionYMoreThan7 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnSouthWestDirection;
     }
 
     public Boolean checkPutPieceCanBePutOnSouthEastDirection(
             // ↘
             Integer currentPiecePositionX,
             Integer currentPiecePositionY,
+            String currentPieceColor,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
+        Boolean isPutPieceCanBePutOnSouthEastDirection = false;
         Boolean isRightPositionMoreThan7;
         Boolean isDownPositionMoreThan7;
+        Integer piecePositionX = currentPiecePositionX;
+        Integer piecePositionY = currentPiecePositionY;
         while (true) {
-            currentPiecePositionX ++;
-            currentPiecePositionY ++;
-            isRightPositionMoreThan7 = currentPiecePositionX > 7;
-            isDownPositionMoreThan7 = currentPiecePositionY > 7;
+            piecePositionX ++;
+            piecePositionY ++;
+            isRightPositionMoreThan7 = piecePositionX > 7;
+            isDownPositionMoreThan7 = piecePositionY > 7;
 
             if (
-                    isRightPositionMoreThan7 &&
-                            isDownPositionMoreThan7
+                    !isRightPositionMoreThan7 &&
+                            !isDownPositionMoreThan7
             ) {
                 if (
-                        getPiece(currentPiecePositionX, currentPiecePositionY)
-                                .getColor()
-                                .equals(
-                                        getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor()
-                                )
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
                 ) {
-                    return true;
+                    isPutPieceCanBePutOnSouthEastDirection = true;
                 } else {
-                    // a "getPiece" is not the same as "putPiece";
-                    continue;
+
                 }
             } else {
-                // isDownPositionYMoreThan7 → true;
-                return false;
+                break;
             }
         }
+        return isPutPieceCanBePutOnSouthEastDirection;
     }
+
 
     public Boolean checkPutPiecePositionForKnight(
             Integer knightPiecePositionX,
