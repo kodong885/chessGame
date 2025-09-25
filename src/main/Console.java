@@ -82,9 +82,9 @@ public class Console {
                     System.out.println("● Please try again !");
                 }
             }
+            // put or attack piece;
             serviceChessGame.attack(currentPiece, putPiecePosition, chessBoard);
             chessBoard.printChessBoard();
-
         }
     }
 

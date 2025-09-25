@@ -3,8 +3,8 @@ package domain;
 public class ChessPiece {
     protected Integer currentPositionX;
     protected Integer currentPositionY;
-    protected String pieceType;
-    protected String color; // "Black" / "White" / "Empty"
+    protected String pieceType; // "Empty", "Pawn", "Queen", "Rook", "King", "Bishop", "Knight";
+    protected String color; // "Black" / "White" / "Empty";
 
     public void setCurrentPositionX(Integer currentPositionX) {
         this.currentPositionX = currentPositionX;
@@ -37,7 +37,6 @@ public class ChessPiece {
     public String getColor() {
         return this.color;
     }
-    // 잠시만 주석처리....... abstract void public attack(); // implement this!!!
 
 }
 
@@ -68,5 +67,4 @@ class Bishop extends ChessPiece {
 class Knight extends ChessPiece {
 
 }
-
 

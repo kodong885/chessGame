@@ -179,11 +179,14 @@ public class ServiceChessGame {
                             || currentPiece.getCurrentPositionY().equals(6)
                     ) {
                         if (
-                                currentPiece.getCurrentPositionY() - putPiecePositionY<= 2 &&
+                                // Pawn이 Y 방향으로 1 또는 2 이동한 경우 &&
+                                // x 불변;
+                                currentPiece.getCurrentPositionY() - putPiecePositionY <= 2 &&
                                         currentPiece.getCurrentPositionY() - putPiecePositionY  >= 1 &&
-                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                        .getColor().equals(currentPiece.getColor()) &&
-                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX) &&
+                                        // 직전은 어떠한 color이더라도 절대 불가 &&
+                                        // 대각선에 다른 color가 있는 경우
+
                         ) {
                             return true;
                         } else {
@@ -322,57 +325,14 @@ public class ServiceChessGame {
                 // Knight가 갈 수 없는 position일 경우 → false
                 // Knight가 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)\
                 if (
-                        !chessBoard.checkPutPiecePositionForKnight(
-                                currentPiece.getCurrentPositionX() + 2,
-                                currentPiece.getCurrentPositionY() - 1,
+                        chessBoard.isKnightPieceCanBePutHere(
+                                currentPiece.getCurrentPositionX(),
+                                currentPiece.getCurrentPositionY(),
                                 putPiecePositionX,
                                 putPiecePositionY
-                        ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() + 2,
-                                        currentPiece.getCurrentPositionY() + 1,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() - 2,
-                                        currentPiece.getCurrentPositionY() - 1,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() - 2,
-                                        currentPiece.getCurrentPositionY() + 1,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() + 1,
-                                        currentPiece.getCurrentPositionY() - 2,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() + 1,
-                                        currentPiece.getCurrentPositionY() + 2,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() - 1,
-                                        currentPiece.getCurrentPositionY() - 2,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                ) ||
-                                !chessBoard.checkPutPiecePositionForKnight(
-                                        currentPiece.getCurrentPositionX() - 1,
-                                        currentPiece.getCurrentPositionY() + 2,
-                                        putPiecePositionX,
-                                        putPiecePositionY
-                                )
+                        )
                 ) {
                     return true;
-
                 } else {
                     return false;
                 }

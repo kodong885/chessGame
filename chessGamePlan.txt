@@ -1,0 +1,199 @@
+class Piece {
+	x
+	y
+	type
+	
+	chessBoard.showWhereThisPieceMove
+}
+
+class ChessBoard {
+	
+}
+
+47-23= 24
+
+userName 
+↓
+print chessBoard
+↓
+set attack turn ( random )
+↓
+(while loop)
+1. get current piece 
+2. get position to move ( initial position ) 
+	→ check whether piece user selected can move && check a sort of chess piece 
+get position where user want to put piece
+- check whether user can move ( return Boolean )
+	if true) check whether user can capture enemy piece ( return Boolean ) → how....???????
+		if true) set each logic to capture...... 
+		if false) continue;
+	if false) sout( it can't move !! );
+
+★★ manage chess piece by making piece object and storing them on the chessboard array ★★
+
+■ each pieces's logic / i have to add cheking logic like there is some piece already or there is not any place;
+- Pawn 
+- Rook
+- Queen
+- King
+- Bishop
+- Knight
+
+-----------------------
+
+(9/12) < to-do-List >
+
+1. (service) 	checkCurrentPieceCanMove 만들기
+2. (service)  checkPutPieceCanMoveHere 만들기
+
+(9/17) < toDoList >
+
+1. getPiece랑 getCurrentPiece 메서드 역할 동일함
+(차이)
+- getPiece → 매개변수가 x, y 모두 Integer
+- getCurrentPiece → 매개변수가 String[] ( console에서 한번만 사용함 ! )
+▶ 그냥 놔두자!!! ( 수정 X 결정 ! )
+
+2. checkPieceAreSurroundedWithSameColor ( in ChessBoard.java )
+→ "current piece를 넣으면, 해당 current piece의 type에 따라서 주변이 같은 color로 둘러쌓여 있는지 확인" 하도록 수정!!
+( 현재 하나씩 비교 중 + outOfBoard 값 검사도 수행 중.... )
+▶ Done!
+
+
+------------------- (9/18 해야할일! ) ---------------------
+1. ( in ServiceChessGame.java ) checkPutPieceCanMoveHere 메서드에서, King 부분 만들기!!!
+--> 음...... 기존 메서드를 재활용 할 수는 없을까.......?
+--> 음.. currentPieceCanMove method에 사용했던 같은 색상으로 둘러쌓여있는지 확인 메서드이용......?
+
+
+2. checkPutPiecePositionOnOneDirection 매서드의 putPiecePosition 매개변수에 유효성 검사(outOfChessBaord) 필요함!
+▶ 그대로 놔두기!!
+3. Missing return statement : 133 → 나중에 해결!!!
+4. (in ChessBoard.java) checkPutPieceHasSameColorWithCurrentPiece 메서드는 왜 만든거임?? 
+▶ currentPiece가 knight일 경우, putPiecePosition이 같은 color인지 검사시에만 사용!
+▶ checkPutPieceHasSameColorWithCurrentKnight 로 이름 변경함!
+
+----------------- 9/19 -----------
+1. checkKingPieceCanPutHere ( in ChessBoard.java ) → currntKingPosition의 X, Y에 각각 더해지고 빼진 값에 유효성 검사 필요!
+
+-------------- 9/21 ------------------
+1. Missing return statement 발생한 메서드들 해결!!! → 완료!!!
+2. (in SrviceChessGame.java) attack 메서드 빌드!
+3. (n GetUserInput.java) 이 파일 만들기!!!!! 
+→ selectCurrentPiece 매서드 마무리 하기!
+
+------ 9/22 ---------
+1. (in SrviceChessGame.java) attack 메서드 만들기!!!!!!!!
+만들고 나면, console.java 만들기 + 오류 수정의 연속!!!!
+++
+2. 만약, a/7이라고 하면 7 → 8로 인식할 수 있도록!! 입력값 수정해주기!!!;
+→ 그냥, 직접적으로 ...??
+(
+체스판 세로순서는 ↓
+1
+2
+3
+4
+5
+6
+7
+8
+)
+3. (ChessBoard.java - 228L) int currentPiecePositionY = Integer.parseInt(currentPiecePosition[1])-1; 
+-->  "-1" 추가함!!
+4. (in ServiceChessGame.java) attack 메서드 검토!!
+-- 8교시 ---
+집가서는 console.java 만들자!!
+-- 9시 이후 --
+이제 실행시키면서 예외 잡기....!!
+
+
+---------- 9/23 -------------
+1. (SerrviceChessGame.java) checkPutPieceCanMoveHere 메서드에서 cace "Pawn" 수정 필요!!! 
+→ "currentPiece의 X랑 putPiece의 X랑 같아야함!" 조건 뺴먹음!!
+▶ 해결함!
+2. a/e라고 넣으면 에러! (NumberFormatException)
+3. a/1(Rook-white) → a/2 하면 에러남!
+→ (in ChessBoard.java) checkPutPieceCanBePutOnLeftDirection 메서드 반환값 수정필요!!
+→ ( 현재 로직 ) ↓
+checkPutPieceCanBePutOnSouthWestDirection 등등 이용. 
+즉, 어떤 한 방향으로 움직일 수 있으면 put 가능!
+( but, 실제 이 메서드의 동작은, 해당 방향에 같은 color가 있는지 여부를 검사 중..... )
+
+( 내부 로직을 좀 더 뜯어보자...! )
+( putPieceCanBePutOnLeftDirection = false
+while문 ↓
+Left쪽 piece를 모두 현재 piece와 "같은 color인지" 비교....;
+
+--- 집 가서 할 일 ---
+( in ChessBoard.java ) checkPutPieceCanBePutOnLeftDirection 메서드 로직 마지막 확인 후, 
+다른 메서드들도 수정!!
+
+----------------- 9/24 ----------------
+1. ( in ChessBoard.java ) checkPutPieceCanBePutOnNorthWestDirection 메서드 확인 필요.....
+▶ 다 고쳤다...!!
+2. 다시 Rook 예외처리 확인하기!! 
+→ checkPutPieceCanBePutOnNorthWestDirection 메서드들 디버깅해야함......!!!
+음,.... 각가 메서드 조건부에서 에러난 거 같은데..... ( 현재 색 상이 && x, y 동일 조건부 )
+혹시, 인덱스 수정을 안했을까?!?!??!!? --> 인덱스는 문제없다.......... 
+▶▶ 조건부 문제다.......
+(2차수정)
+(현재Color = putPieceColor) && (x, y 동일) 
+→ 중간에 같은 color를 처리못한다.. 
+→ 반드시 piecePositionX, Y 이용해야함...!!!!
+
+-------------------- 9/25 -----------------------
+1. ( in ChessBoard.java ) checkPutPieceCanBePutOnNorthWestDirection 조건부 수정하자.....
+
+while (true) {
+            piecePositionY ++;
+            isDownPositionYMoreThan7 = piecePositionY > 7;
+            if (!isDownPositionYMoreThan7) {
+                if (
+                        !currentPieceColor.equals(
+                                getPiece(putPiecePositionX, putPiecePositionY).getColor()
+                        ) &&
+                                piecePositionX.equals(putPiecePositionX) &&
+                                piecePositionY.equals(putPiecePositionY)
+                ) {
+                    isPutPieceCanBePutOnDownDirection = true;
+                } else { }
+            } else {
+                break;
+            }
+        }
+        return isPutPieceCanBePutOnDownDirection;
+
+↓  ( 조건부 수정 - outOfChessBoard && 아군 piece가 위치할때(못넘음!) → break; )
+!isDownPositionYMoreThan7 && 
+                    !currentPieceColor.equals(
+                            getPiece(piecePositionX, piecePositionY)
+                                    .getColor()
+                    )
+▶해결!!
+
+2. color에 따른 piece 배치 ( color 다르게 ) "♚♛♜♝♞♔♕♖♗♘♙"
+출처 : https://xn--yq5bk9r.com/blog/emoji-chess)
+▶ 완료;
+★ 각각 piece들의 capture 여부 확인!
+3. knight put 문제 발생......
+→ ( in ChessBoard.java ) checkPutPieceHasSameColorWithCurrentKnight 메서드의 문제...!
+( ServiceChessGame.java에서는 정상 작동, but, Console.java의 attack 메서드에서 오작동...!!
+▶ 해결!
+4 . Bishop 움직임 에러.....!
+해결하자!!!
+▶ 해결!
+
+5. Pawn의 대각선 공격 가능한지 확인해야함...!!
+→ 대각선에 위치하는 piece의 color가 Pawn 자신의 color와 다른 경우 → true;
+
+6. (in ServiceChessGame.java) attack 메서드의 Console.java 파일에서의 사용 위치 다시 확인해보자...!!
+
+
+
+7. ( in ChessBoard.java ) checkPiecePositionOutOfChess 메서드에서, 항상 false인 Boolean 값 처리해주기..
+
+
+
+//
+

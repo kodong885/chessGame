@@ -162,24 +162,61 @@ public class ChessBoard {
                 if (spaceNum % 2 == 0) {
                     chessBoardLine += " ";
                 } else {
-                    switch (chessBoard[i][j/2].pieceType) { // why this statement cover all case !!!!!!!;
+                    ChessPiece chessPiece = chessBoard[i][j/2];
+                    switch (chessPiece.pieceType) { // why this statement cover all case !!!!!!!;
                         case "Pawn" :
-                            chessBoardLine += "♟";
+                            if (chessPiece.getColor().equals("Black")) {
+                                chessBoardLine += "♙";
+                            } else if (chessPiece.getColor().equals("White")) {
+                                chessBoardLine += "♟";
+                            } else {
+                                System.out.println("Error (ChessBoard.java:173)");
+                            }
                             break;
                         case "Rook" :
-                            chessBoardLine += "♜";
+                            if (chessPiece.getColor().equals("Black")) {
+                                chessBoardLine += "♖";
+                            } else if (chessPiece.getColor().equals("White")) {
+                                chessBoardLine += "♜";
+                            } else {
+                                System.out.println("Error (ChessBoard.java:182)");
+                            }
                             break;
                         case "Queen" :
-                            chessBoardLine += "♛";
+                            if (chessPiece.getColor().equals("Black")) {
+                                chessBoardLine += "♕";
+                            } else if (chessPiece.getColor().equals("White")) {
+                                chessBoardLine += "♛";
+                            } else {
+                                System.out.println("Error (ChessBoard.java:191)");
+                            }
                             break;
                         case "King" :
-                            chessBoardLine += "♚";
+                            if (chessPiece.getColor().equals("Black")) {
+                                chessBoardLine += "♔";
+                            } else if (chessPiece.getColor().equals("White")) {
+                                chessBoardLine += "♚";
+                            } else {
+                                System.out.println("Error (ChessBoard.java:200)");
+                            }
                             break;
                         case "Bishop" :
-                            chessBoardLine += "♝";
+                            if (chessPiece.getColor().equals("Black")) {
+                                chessBoardLine += "♗";
+                            } else if (chessPiece.getColor().equals("White")) {
+                                chessBoardLine += "♝";
+                            } else {
+                                System.out.println("Error (ChessBoard.java:209)");
+                            }
                             break;
                         case "Knight" :
-                            chessBoardLine += "♞";
+                            if (chessPiece.getColor().equals("Black")) {
+                                chessBoardLine += "♘";
+                            } else if (chessPiece.getColor().equals("White")) {
+                                chessBoardLine += "♞";
+                            } else {
+                                System.out.println("Error (ChessBoard.java:218)");
+                            }
                             break;
                         case "Empty" :
                             chessBoardLine += "▭";
@@ -1057,7 +1094,6 @@ public class ChessBoard {
                                     putPiecePositionX,
                                     putPiecePositionY
                             )
-                    // 이게 왜 false가 나오는거지.....?!?!?!??!?!???;
             ) {
                 return true;
             } else {
@@ -1065,7 +1101,7 @@ public class ChessBoard {
                 return false;
             }
 
-        } else if (currentPiece.getPieceType().equals("Queen")) {
+        } else if (currentPiece.getPieceType().equals("Bishop")) {
             if (
                     checkPutPieceCanBePutOnNorthEastDirection(
                             currentPiecePositionX,
@@ -1103,7 +1139,7 @@ public class ChessBoard {
             }
 
         } else {
-            System.out.println("ChessBoard.java:1090");
+            System.out.println("ChessBoard.java:1142");
             System.exit(1); // when currentPiece's type is not a one of Bishop and Queen, Rook;
             return null;
         }
@@ -1124,7 +1160,13 @@ public class ChessBoard {
         while (true) {
             piecePositionX --;
             isLeftPositionXLessThan0 = piecePositionX < 0;
-            if (!isLeftPositionXLessThan0) {
+            if (
+                    !isLeftPositionXLessThan0 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
+            ) {
                 if (
                         !currentPieceColor.equals(
                                 getPiece(putPiecePositionX, putPiecePositionY).getColor()
@@ -1158,7 +1200,13 @@ public class ChessBoard {
         while (true) {
             piecePositionX ++;
             isRightPositionXMoreThan7 = piecePositionX > 7;
-            if (!isRightPositionXMoreThan7) {
+            if (
+                    !isRightPositionXMoreThan7 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
+            ) {
                 if (
                         !currentPieceColor.equals(
                                 getPiece(putPiecePositionX, putPiecePositionY).getColor()
@@ -1192,7 +1240,13 @@ public class ChessBoard {
         while (true) {
             piecePositionY --;
             isUpPositionYLessThan0 = piecePositionY < 0;
-            if (!isUpPositionYLessThan0) {
+            if (
+                    !isUpPositionYLessThan0 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
+            ) {
                 if (
                         !currentPieceColor.equals(
                                 getPiece(putPiecePositionX, putPiecePositionY).getColor()
@@ -1226,7 +1280,13 @@ public class ChessBoard {
         while (true) {
             piecePositionY ++;
             isDownPositionYMoreThan7 = piecePositionY > 7;
-            if (!isDownPositionYMoreThan7) {
+            if (
+                    !isDownPositionYMoreThan7 &&
+                    !currentPieceColor.equals(
+                            getPiece(piecePositionX, piecePositionY)
+                                    .getColor()
+                    )
+            ) {
                 if (
                         !currentPieceColor.equals(
                                 getPiece(putPiecePositionX, putPiecePositionY).getColor()
@@ -1266,7 +1326,11 @@ public class ChessBoard {
 
             if (
                     !isLeftPositionXLessThan0 &&
-                            !isUpPositionYLessThan0
+                            !isUpPositionYLessThan0 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
             ) {
                 if (
                         !currentPieceColor.equals(
@@ -1308,7 +1372,11 @@ public class ChessBoard {
 
             if (
                     !isRightPositionXMoreThan7 &&
-                            !isUpPositionYLessThan0
+                            !isUpPositionYLessThan0 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
             ) {
                 if (
                         !currentPieceColor.equals(
@@ -1349,7 +1417,11 @@ public class ChessBoard {
 
             if (
                     !isLeftPositionLessThan0 &&
-                            !isDownPositionMoreThan7
+                            !isDownPositionMoreThan7 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
             ) {
                 if (
                         !currentPieceColor.equals(
@@ -1390,7 +1462,11 @@ public class ChessBoard {
 
             if (
                     !isRightPositionMoreThan7 &&
-                            !isDownPositionMoreThan7
+                            !isDownPositionMoreThan7 &&
+                            !currentPieceColor.equals(
+                                    getPiece(piecePositionX, piecePositionY)
+                                            .getColor()
+                            )
             ) {
                 if (
                         !currentPieceColor.equals(
@@ -1411,44 +1487,39 @@ public class ChessBoard {
     }
 
 
-    public Boolean checkPutPiecePositionForKnight(
-            Integer knightPiecePositionX,
-            Integer knightPiecePositionY,
+    public Boolean isKnightPieceCanBePutHere(
+            Integer currentPiecePositionX,
+            Integer currentPiecePositionY,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
-        // 아군이 있는 경우(X), 체스 보드 판을 넘어선 경우(X);
         if (
+            // 체스 보드 판을 넘어서지 않은 경우 &&
+            // a position where a knight is to be able to put &&
+            // putPiece color is different with currentKnight color
                 !checkPiecePositionOutOfChess(
                         putPiecePositionX,
                         putPiecePositionY
-                ) && !checkPiecePositionOutOfChess(
-                        knightPiecePositionX,
-                        knightPiecePositionY
-                )
+                ) &&
+                        isKnightPieceAvailablePosition(
+                                currentPiecePositionX,
+                                currentPiecePositionY,
+                                putPiecePositionX,
+                                putPiecePositionY
+                        ) &&
+                        !checkPutPieceHasSameColorWithCurrentKnight(
+                                currentPiecePositionX,
+                                currentPiecePositionY,
+                                putPiecePositionX,
+                                putPiecePositionY
+                        )
         ) {
-            if (
-                    !checkPutPieceHasSameColorWithCurrentKnight(
-                            knightPiecePositionX,
-                            knightPiecePositionY,
-                            putPiecePositionX,
-                            putPiecePositionY
-                    )
-            ) {
-                System.out.println("● There isn't on the same color piece here!");
-                return true;
-            } else {
-                // There's a same color piece here;
-                return false;
-            }
-
+            return true;
         } else {
-            System.out.println("●  You can't put this piece(%s) here !");
             return false;
         }
 
     }
-
 
     public Boolean checkPiecePositionOutOfChess(
             Integer putPiecePositionX,
@@ -1518,6 +1589,54 @@ public class ChessBoard {
         } else {
             return false;
         }
+    }
+
+    public Boolean isKnightPieceAvailablePosition(
+            Integer currentKnightPositionX,
+            Integer currentKnightPositionY,
+            Integer putPiecePositionX,
+            Integer putPiecePositionY
+    ) {
+        if (
+                (
+                        currentKnightPositionX + 2 == putPiecePositionX &&
+                                currentKnightPositionY - 1 == putPiecePositionY
+                        ) ||
+                        (
+                                currentKnightPositionX + 2 == putPiecePositionX &&
+                                        currentKnightPositionY + 1 == putPiecePositionY
+                                ) ||
+                        (
+                                currentKnightPositionX - 2 == putPiecePositionX &&
+                                        currentKnightPositionY - 1 == putPiecePositionY
+                                ) ||
+                        (
+                                currentKnightPositionX - 2 == putPiecePositionX &&
+                                        currentKnightPositionY + 1 == putPiecePositionY
+                                ) ||
+                        (
+                                currentKnightPositionX + 1 == putPiecePositionX &&
+                                        currentKnightPositionY - 2 == putPiecePositionY
+                                ) ||
+                        (
+                                currentKnightPositionX + 1 == putPiecePositionX &&
+                                        currentKnightPositionY + 2 == putPiecePositionY
+                                ) ||
+                        (
+                                currentKnightPositionX - 1 == putPiecePositionX &&
+                                        currentKnightPositionY - 2 == putPiecePositionY
+                                ) ||
+                        (
+                                currentKnightPositionX - 1 == putPiecePositionX &&
+                                        currentKnightPositionY + 2 == putPiecePositionY
+                                )
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+
+
     }
 
     public Boolean checkKingPieceCanPutHere(
