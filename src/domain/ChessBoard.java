@@ -151,7 +151,7 @@ public class ChessBoard {
     }
 
     public void printChessBoard() {
-        System.out.println(String.format("     < '%s' > (Black)   ", player1Name));
+        System.out.println(String.format("   < '%s' > (Black)   ", player1Name));
         String chessBoardLine;
         Integer spaceNum;
         for (int i = 0; i < 8; i++) {
@@ -226,7 +226,7 @@ public class ChessBoard {
             }
             System.out.println(chessBoardLine);
         }
-        System.out.println(String.format("     < '%s' > (White)   ", player2Name));
+        System.out.println(String.format("   < '%s' > (White)   ", player2Name));
 
     }
 
@@ -1572,13 +1572,13 @@ public class ChessBoard {
     }
 
     public Boolean checkPutPieceHasSameColorWithCurrentKnight(
-            Integer knightPositionX,
-            Integer knightPositionY,
+            Integer currentPiecePositionX,
+            Integer currentPiecePositionY,
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
         if (
-                getPiece(knightPositionX, knightPositionY)
+                getPiece(currentPiecePositionX, currentPiecePositionY)
                         .getColor()
                         .equals(
                                 getPiece(putPiecePositionX, putPiecePositionY)

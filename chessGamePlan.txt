@@ -184,16 +184,25 @@ while (true) {
 해결하자!!!
 ▶ 해결!
 
-5. Pawn의 대각선 공격 가능한지 확인해야함...!!
-→ 대각선에 위치하는 piece의 color가 Pawn 자신의 color와 다른 경우 → true;
+.
+--------------------  9/26 (해야할 일) -----------------
 
-6. (in ServiceChessGame.java) attack 메서드의 Console.java 파일에서의 사용 위치 다시 확인해보자...!!
+1. Pawn의 대각선 공격 가능한지 확인해야함...!!
+대각선 위치 piece의 color가 자신 color와 다른 경우 && 
+직전 절대 불가! 
+→ y로 한칸 이동했을 때 color가 "Empty" color인 경우만 → true;
+→ 기본 로직 완성.....! ( 다른 Pawn 경우에도 적용 시키자..!! )
+▶ 해결!
 
+2. (in ServiceChessGame.java) attack 메서드의 Console.java 파일에서의 사용 위치 다시 확인해보자...!!
 
+3. ( in ChessBoard.java ) checkPiecePositionOutOfChess 메서드에서, 항상 false인 Boolean 값 처리해주기
 
-7. ( in ChessBoard.java ) checkPiecePositionOutOfChess 메서드에서, 항상 false인 Boolean 값 처리해주기..
+4. ( in SrviceChessGame.java ) checkCurrentPieceCanMove 메서드에서 Pawn 로직 다시 확인..(대각선 공격 가능 여부 처리필요!)
 
+5. knight 공격 로직 이상함.. ( in ChessBoard.java ) checkPutPieceCanBePutOnPutPiecePosition 이 메서드 다시 확인해야할 듯...... (isKnightPieceCanBePutHere) → 이거부터 하자!!!!
 
 
 //
+
 

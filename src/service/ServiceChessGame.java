@@ -17,8 +17,8 @@ public class ServiceChessGame {
                 // 2. 적군 piece
                 // 대각선 공격 가능 → true;
                 if (currentChessPiece.getColor().equals("Black")) {
-                    if (chessBoard.
-                            getPiece(currentChessPieceX, currentChessPieceY + 1)
+                    if (
+                            chessBoard.getPiece(currentChessPieceX, currentChessPieceY + 1)
                             .getColor()
                             .equals("Empty")
                     ) {
@@ -178,37 +178,107 @@ public class ServiceChessGame {
                             currentPiece.getCurrentPositionY().equals(1)
                             || currentPiece.getCurrentPositionY().equals(6)
                     ) {
-                        if (
-                                // Pawn이 Y 방향으로 1 또는 2 이동한 경우 &&
-                                // x 불변;
-                                currentPiece.getCurrentPositionY() - putPiecePositionY <= 2 &&
-                                        currentPiece.getCurrentPositionY() - putPiecePositionY  >= 1 &&
-                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX) &&
-                                        // 직전은 어떠한 color이더라도 절대 불가 &&
-                                        // 대각선에 다른 color가 있는 경우
 
+                        if (
+                                currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            return true;
+                            if (
+                                    currentPiece.getCurrentPositionY() - putPiecePositionY <= 2 &&
+                                            currentPiece.getCurrentPositionY() - putPiecePositionY >= 1 &&
+                                            chessBoard.getPiece(
+                                                    putPiecePositionX,
+                                                    putPiecePositionY
+                                            ).getColor().equals("Empty")
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+
                         } else {
-                            System.out.println("● You can't move here!");
-                            System.out.println("● Please try again!");
-                            return false;
+                            // !currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                            if (
+                                    (
+                                            (
+                                                    putPiecePositionX.equals(currentPiece.getCurrentPositionX() + 1) &&
+                                                            putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                            ) &&
+                                                    (
+                                                            chessBoard.getPiece(
+                                                                    currentPiece.getCurrentPositionX() + 1,
+                                                                    currentPiece.getCurrentPositionY() - 1
+                                                            ).getColor().equals("Black")
+                                                    )
+                                            ) ||
+                                            (
+                                                    (
+                                                            putPiecePositionX.equals(currentPiece.getCurrentPositionX() - 1) &&
+                                                                    putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                                    ) &&
+                                                            (
+                                                                    chessBoard.getPiece(
+                                                                            currentPiece.getCurrentPositionX() - 1,
+                                                                            currentPiece.getCurrentPositionY() - 1
+                                                                    ).getColor().equals("Black")
+                                                            )
+                                            )
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
                         }
 
                     } else {
                         // when Pawn is located at some line except line2 or line7;
                         // it can move 1 space;
                         if (
-                                currentPiece.getCurrentPositionY() - putPiecePositionY == 1 &&
-                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor().equals(currentPiece.getColor()) &&
-                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                                currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            return true;
+                            if (
+                                    currentPiece.getCurrentPositionY() - putPiecePositionY == 1 &&
+                                            chessBoard.getPiece(
+                                                    putPiecePositionX,
+                                                    putPiecePositionY
+                                            ).getColor().equals("Empty")
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+
                         } else {
-                            System.out.println("● You can't move here!");
-                            System.out.println("● Please try again!");
-                            return false;
+                            // !currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                            if (
+                                    (
+                                            (
+                                                    putPiecePositionX.equals(currentPiece.getCurrentPositionX() + 1) &&
+                                                            putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                            ) &&
+                                                    (
+                                                            chessBoard.getPiece(
+                                                                    currentPiece.getCurrentPositionX() + 1,
+                                                                    currentPiece.getCurrentPositionY() - 1
+                                                            ).getColor().equals("Black")
+                                                    )
+                                    ) ||
+                                            (
+                                                    (
+                                                            putPiecePositionX.equals(currentPiece.getCurrentPositionX() - 1) &&
+                                                                    putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                                    ) &&
+                                                            (
+                                                                    chessBoard.getPiece(
+                                                                            currentPiece.getCurrentPositionX() - 1,
+                                                                            currentPiece.getCurrentPositionY() - 1
+                                                                    ).getColor().equals("Black")
+                                                            )
+                                            )
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
                         }
                     }
 
@@ -219,35 +289,108 @@ public class ServiceChessGame {
                             currentPiece.getCurrentPositionY().equals(1)
                                     || currentPiece.getCurrentPositionY().equals(6)
                     ) {
+
                         if (
-                                putPiecePositionY - currentPiece.getCurrentPositionY() <= 2 &&
-                                        putPiecePositionY - currentPiece.getCurrentPositionY()  >= 1 &&
-                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor().equals(currentPiece.getColor()) &&
-                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                                currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            return true;
+                            if (
+                                    putPiecePositionY - currentPiece.getCurrentPositionY() <= 2  &&
+                                            putPiecePositionY - currentPiece.getCurrentPositionY() >= 1 &&
+                                            chessBoard.getPiece(
+                                                    putPiecePositionX,
+                                                    putPiecePositionY
+                                            ).getColor().equals("Empty")
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+
                         } else {
-                            System.out.println("● You can't move here!");
-                            System.out.println("● Please try again!");
-                            return false;
+                            // !currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                            if (
+                                    (
+                                            (
+                                                    putPiecePositionX.equals(currentPiece.getCurrentPositionX() + 1) &&
+                                                            putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                            ) &&
+                                                    (
+                                                            chessBoard.getPiece(
+                                                                    currentPiece.getCurrentPositionX() + 1,
+                                                                    currentPiece.getCurrentPositionY() - 1
+                                                            ).getColor().equals("White")
+                                                    )
+                                    ) ||
+                                            (
+                                                    (
+                                                            putPiecePositionX.equals(currentPiece.getCurrentPositionX() - 1) &&
+                                                                    putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                                    ) &&
+                                                            (
+                                                                    chessBoard.getPiece(
+                                                                            currentPiece.getCurrentPositionX() - 1,
+                                                                            currentPiece.getCurrentPositionY() - 1
+                                                                    ).getColor().equals("White")
+                                                            )
+                                            )
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
                         }
+
                     } else {
                         // when Pawn is located at some line except line2 or line7;
                         // it can move 1 space;
                         if (
-                                putPiecePositionY - currentPiece.getCurrentPositionY() == 1 &&
-                                        !chessBoard.getPiece(putPiecePositionX, putPiecePositionY)
-                                                .getColor().equals(currentPiece.getColor()) &&
-                                        currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                                currentPiece.getCurrentPositionX().equals(putPiecePositionX)
                         ) {
-                            return true;
-                        } else {
-                            System.out.println("● You can't move here!");
-                            System.out.println("● Please try again!");
-                            return false;
-                        }
+                            if (
+                                    putPiecePositionY - currentPiece.getCurrentPositionY() == 1 &&
+                                            chessBoard.getPiece(
+                                                    putPiecePositionX,
+                                                    putPiecePositionY
+                                            ).getColor().equals("Empty")
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
 
+                        } else {
+                            // !currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                            if (
+                                    (
+                                            (
+                                                    putPiecePositionX.equals(currentPiece.getCurrentPositionX() + 1) &&
+                                                            putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                            ) &&
+                                                    (
+                                                            chessBoard.getPiece(
+                                                                    currentPiece.getCurrentPositionX() + 1,
+                                                                    currentPiece.getCurrentPositionY() - 1
+                                                            ).getColor().equals("White")
+                                                    )
+                                    ) ||
+                                            (
+                                                    (
+                                                            putPiecePositionX.equals(currentPiece.getCurrentPositionX() - 1) &&
+                                                                    putPiecePositionY.equals(currentPiece.getCurrentPositionY() - 1)
+                                                    ) &&
+                                                            (
+                                                                    chessBoard.getPiece(
+                                                                            currentPiece.getCurrentPositionX() - 1,
+                                                                            currentPiece.getCurrentPositionY() - 1
+                                                                    ).getColor().equals("White")
+                                                            )
+                                            )
+                            ) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
                     }
 
                 } else {
