@@ -2,6 +2,7 @@ package main;
 
 import Utils.GetUserInput;
 import Utils.PrintLoadingString;
+import domain.Checkmate;
 import service.ServiceChessGame;
 
 import java.util.Random;
@@ -16,6 +17,7 @@ public class ChessGameApplication {
         PrintLoadingString printLoadingString = new PrintLoadingString();
         Random random = new Random();
         ServiceChessGame serviceChessGame = new ServiceChessGame();
+        Checkmate checkmate = new Checkmate();
 
 
         Console console = new Console();
@@ -24,7 +26,8 @@ public class ChessGameApplication {
                 getUserInput,
                 printLoadingString,
                 random,
-                serviceChessGame
+                serviceChessGame,
+                checkmate
         );
 
     }

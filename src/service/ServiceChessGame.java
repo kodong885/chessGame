@@ -1,5 +1,6 @@
 package service;
 
+import domain.Checkmate;
 import domain.ChessBoard;
 import domain.ChessPiece;
 
@@ -12,10 +13,7 @@ public class ServiceChessGame {
         switch (currentChessPiece.getPieceType()) {
 
             case "Pawn" :
-                // 앞에 piece가 있을 때
-                // 1. 아군 piece
-                // 2. 적군 piece
-                // 대각선 공격 가능 → true;
+
                 if (currentChessPiece.getColor().equals("Black")) {
                     if (
                             chessBoard.getPiece(currentChessPieceX, currentChessPieceY + 1)
@@ -466,7 +464,7 @@ public class ServiceChessGame {
 
             case "Knight" :
                 // Knight가 갈 수 없는 position일 경우 → false
-                // Knight가 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)\
+                // Knight가 갈 수 있는 position이지만, 아군 piece가 있는 경우 (false)
                 if (
                         chessBoard.isKnightPieceCanBePutHere(
                                 currentPiece.getCurrentPositionX(),
@@ -543,4 +541,29 @@ public class ServiceChessGame {
 
     }
 
+    public Boolean isCheckMate(
+            ChessBoard chessBoard,
+            Checkmate checkmate,
+            String attackUser
+    ) {
+
+        if (attackUser.equals("White")) {
+            ChessPiece blackKingPiece = chessBoard.getBlackKingPiece();
+        } else {
+            ChessPiece whiteKingPiece = chessBoard.getWhiteKingPiece();
+        }
+
+        if (
+                checkmate.isCheckmate(whiteKingPiece, chessBoard) ||
+                        checkmate.isCheckmate(blackKingPiece, chessBoard)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
 }
+

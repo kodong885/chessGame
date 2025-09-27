@@ -2,6 +2,7 @@ package main;
 
 import Utils.GetUserInput;
 import Utils.PrintLoadingString;
+import domain.Checkmate;
 import domain.ChessBoard;
 import domain.ChessPiece;
 import service.ServiceChessGame;
@@ -15,7 +16,8 @@ public class Console {
             GetUserInput getUserInput,
             PrintLoadingString printLoadingString,
             Random random,
-            ServiceChessGame serviceChessGame
+            ServiceChessGame serviceChessGame,
+            Checkmate checkmate
     ) {
         String startMessage =
                 "< ------------ Ko-ChessGame is On ------------> " +
@@ -85,7 +87,24 @@ public class Console {
             // put or attack piece;
             serviceChessGame.attack(currentPiece, putPiecePosition, chessBoard);
             chessBoard.printChessBoard();
+
+            // check check-mate !! ( 어떤 color의 턴이냐에 따라서 checkmate도 다르게 설정해야함!!
+            if (attackUser.equals("White")) {
+
+            } else {
+
+            }
+            if (serviceChessGame.isCheckMate(chessBoard, checkmate)) {
+                System.out.println("%s의 checkmate!!");
+                System.out.println("%s의 승리!! / 게임 종료!!!!");
+                break;
+            } else {
+                continue;
+
+            }
+
         }
     }
 
 }
+

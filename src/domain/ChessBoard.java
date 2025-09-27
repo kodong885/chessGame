@@ -260,11 +260,56 @@ public class ChessBoard {
         }
         int currentPiecePositionY = Integer.parseInt(currentPiecePosition[1])-1;
         return chessBoard[currentPiecePositionY][currentPiecePositionX];
-
     }
 
     public ChessPiece getPiece(Integer piecePositionX, Integer piecePositionY ) {
         return chessBoard[piecePositionY][piecePositionX];
+    }
+
+    public ChessPiece getWhiteKingPiece() {
+        ChessPiece whiteKingPiece;
+
+        for (int i = 0; i <  8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (
+                        chessBoard[i][j]
+                                .getPieceType()
+                                .equals("King") &&
+                                chessBoard[i][j]
+                                        .getColor()
+                                        .equals("White")
+                ) {
+                    whiteKingPiece = chessBoard[i][j];
+                    return whiteKingPiece;
+                } else {
+                    continue;
+                }
+            }
+        }
+        // throw 학습 후 진행!!!!!;
+    }
+
+    public ChessPiece getBlackKingPiece() {
+        ChessPiece blackKingPiece;
+
+        for (int i = 0; i <  8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (
+                        chessBoard[i][j]
+                                .getPieceType()
+                                .equals("King") &&
+                                chessBoard[i][j]
+                                        .getColor()
+                                        .equals("Black")
+                ) {
+                    blackKingPiece = chessBoard[i][j];
+                    return blackKingPiece;
+                } else {
+                    continue;
+                }
+            }
+        }
+        // throw 학습 후 진행!!!!!;
     }
 
 
@@ -1554,7 +1599,7 @@ public class ChessBoard {
         if (
                 putPiecePositionY > 7
         ) {
-            putPiecePositionXMoreThan7 = true;
+            putPiecePositionYMoreThan7 = true;
         } else {
             // do nothing;
         }
@@ -1823,5 +1868,6 @@ public class ChessBoard {
         } else {
             return false;
         }
+
     }
 }

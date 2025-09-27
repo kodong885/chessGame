@@ -193,14 +193,26 @@ while (true) {
 → y로 한칸 이동했을 때 color가 "Empty" color인 경우만 → true;
 → 기본 로직 완성.....! ( 다른 Pawn 경우에도 적용 시키자..!! )
 ▶ 해결!
+2. knight 공격 로직 이상함.. ( in ChessBoard.java ) checkPutPieceCanBePutOnPutPiecePosition 이 메서드 다시 확인해야할 듯...... (isKnightPieceCanBePutHere) → 이거부터 하자!!!!
+▶ 해결
+3. (in ServiceChessGame.java) attack 메서드의 Console.java 파일에서의 "사용 위치" 다시 확인해보자...!
+▶ 정상!
+4. ( in ChessBoard.java ) checkPiecePositionOutOfChess 메서드에서, 항상 false인 Boolean 값 처리해주기!
+▶해결!
+5. ( in SrviceChessGame.java ) checkCurrentPieceCanMove 메서드에서 Pawn 로직 다시 확인..(대각선 공격 가능 여부 처리필요!)
+▶ 완료!
 
-2. (in ServiceChessGame.java) attack 메서드의 Console.java 파일에서의 사용 위치 다시 확인해보자...!!
+6. king 체크 메이트 구현!!!!
+콘솔에서 턴 돌떄마다 체크... 
 
-3. ( in ChessBoard.java ) checkPiecePositionOutOfChess 메서드에서, 항상 false인 Boolean 값 처리해주기
+---------------------- 09/27 ---------------------
+1. king 체크 메이트 구현!
+- king 이 놓을 수 있는 position에 각각 king을 놓았을 경우를 가정( 해당 position의 x, y를 각각 만들기 ) ( putKingPiece 라고 명명 )
+- 다른 color piece 가 도달할 수 있는 자리에 해당 모든 경우의 putKingPiece이 해당될 때.
+putKingPiece 
+- ★ 어떤 color의 턴이냐에 따라서 checkmate도 다르게 설정하기!!
+2.  throw 예외 던지기 학습 후, ( in ChessBoard.java ) getWhiteKingPiece, getBlackKingPiece 메서드에 예외 처리 해주기!! ( for 문! )
 
-4. ( in SrviceChessGame.java ) checkCurrentPieceCanMove 메서드에서 Pawn 로직 다시 확인..(대각선 공격 가능 여부 처리필요!)
-
-5. knight 공격 로직 이상함.. ( in ChessBoard.java ) checkPutPieceCanBePutOnPutPiecePosition 이 메서드 다시 확인해야할 듯...... (isKnightPieceCanBePutHere) → 이거부터 하자!!!!
 
 
 //
