@@ -66,7 +66,7 @@ public class Checkmate {
                                 - 1,
                                 + 1
                         ) &&
-                        isKingCanBeCaptured( // y-1
+                        isKingCanBeCaptured( // y+1
                                 chessBoard,
                                 otherPieceColor,
                                 kingPiecePositionX,
@@ -74,7 +74,7 @@ public class Checkmate {
                                 0,
                                 + 1
                         ) &&
-                        isKingCanBeCaptured( // x+1/y-+1
+                        isKingCanBeCaptured( // x+1/y+1
                                 chessBoard,
                                 otherPieceColor,
                                 kingPiecePositionX,

@@ -549,21 +549,21 @@ public class ServiceChessGame {
 
         if (attackUser.equals("White")) {
             ChessPiece blackKingPiece = chessBoard.getBlackKingPiece();
+            if (checkmate.isCheckmate(blackKingPiece, chessBoard)) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
+            // attackUser.equals("Black")
             ChessPiece whiteKingPiece = chessBoard.getWhiteKingPiece();
+            if (checkmate.isCheckmate(whiteKingPiece, chessBoard)) {
+                return true;
+            } else {
+                return false;
+            }
         }
-
-        if (
-                checkmate.isCheckmate(whiteKingPiece, chessBoard) ||
-                        checkmate.isCheckmate(blackKingPiece, chessBoard)
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-
     }
-
 
 }
 

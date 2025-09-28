@@ -3,8 +3,8 @@ package Utils;
 import java.util.Scanner;
 
 public class GetUserInput {
-    public String inputUserName(Scanner scanner, int userTure) {
-        System.out.println(String.format("userName%d's name >>", userTure));
+    public String inputUserName(Scanner scanner, String userColor) {
+        System.out.println(String.format("'%s' color user name >>", userColor));
         return scanner.nextLine();
     }
 
@@ -22,7 +22,6 @@ public class GetUserInput {
             ) {
                 return currentPiece;
             } else {
-                System.out.println("● 잘못 입력함 ㅋ 다시 입력하시오~");
                 System.out.println("● Please try again !");
             }
 
@@ -41,7 +40,6 @@ public class GetUserInput {
             ) {
                 return currentPiece;
             } else {
-                System.out.println("● 잘못 입력함 ㅋ 다시 입력하시오~");
                 System.out.println("● Please try again !");
             }
         }

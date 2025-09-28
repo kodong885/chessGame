@@ -286,7 +286,8 @@ public class ChessBoard {
                 }
             }
         }
-        // throw 학습 후 진행!!!!!;
+        throw new RuntimeException("ChessBoard.java:298");
+
     }
 
     public ChessPiece getBlackKingPiece() {
@@ -309,6 +310,7 @@ public class ChessBoard {
                 }
             }
         }
+        throw new RuntimeException("ChessBoard.java:313");
         // throw 학습 후 진행!!!!!;
     }
 
@@ -1184,7 +1186,7 @@ public class ChessBoard {
             }
 
         } else {
-            System.out.println("ChessBoard.java:1142");
+            System.out.println("ChessBoard.java:1189");
             System.exit(1); // when currentPiece's type is not a one of Bishop and Queen, Rook;
             return null;
         }

@@ -213,6 +213,8 @@ putKingPiece
 - ★ 어떤 color의 턴이냐에 따라서 checkmate도 다르게 설정하기!!
 2.  throw 예외 던지기 학습 후, ( in ChessBoard.java ) getWhiteKingPiece, getBlackKingPiece 메서드에 예외 처리 해주기!! ( for 문! )
 
+-------------- 09/28 ---------------
+1. check-mate 작동과정에서 오류발생...!!!!
 
 
 //
