@@ -43,11 +43,13 @@ public class Console {
             gameTurn++;
             if (gameTurn % 2 == 1) {
                 attackUser = "Black";
+                System.out.println(String.format("🍔'%s'(%s) turn🍔", attackUser, blackPlayerName));
             } else {
                 attackUser = "White";
+                System.out.println(String.format("🍔'%s'(%s) turn🍔", attackUser, whitePlayerName));
             }
 
-            System.out.println(String.format("🍔'%s'(%s) turn🍔", blackPlayerName, attackUser));
+
             ChessPiece currentPiece;
             while (true) {
                 while (true) {
@@ -103,16 +105,16 @@ public class Console {
 
             // check check-mate !! ( 어떤 color의 턴이냐에 따라서 checkmate도 다르게 설정해야함!!
             if (attackUser.equals("White")) {
-                if (serviceChessGame.isCheckMate(chessBoard, checkmate, "Black")) {
-                    System.out.println(String.format(" ⭐⭐ checkmate! ( %s win ) ⭐⭐", blackPlayerName));
+                if (serviceChessGame.isCheckMate(chessBoard, checkmate, "White")) {
+                    System.out.println(String.format(" ⭐⭐ checkmate! ( %s win ) ⭐⭐", whitePlayerName));
                     break;
                 } else {
                     continue;
                 }
             } else {
                 // attackUser.equals("Black")
-                if (serviceChessGame.isCheckMate(chessBoard, checkmate, "White")) {
-                    System.out.println(String.format(" ⭐⭐ checkmate! ( %s win ) ⭐⭐", whitePlayerName));
+                if (serviceChessGame.isCheckMate(chessBoard, checkmate, "Black")) {
+                    System.out.println(String.format(" ⭐⭐ checkmate! ( %s win ) ⭐⭐", blackPlayerName));
                     break;
                 } else {
                     continue;

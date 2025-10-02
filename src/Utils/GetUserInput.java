@@ -9,37 +9,44 @@ public class GetUserInput {
     }
 
     public String[] selectCurrentPiece(Scanner scanner) {
-        // "a/7" 이런 형식으로 입력 받아야함!!!
         while (true) {
-            System.out.println(">>");
-            String[] currentPiece = scanner.nextLine().split("/");
+            try {
+                System.out.println(">>");
+                String[] currentPiece = scanner.nextLine().split("/");
+                if (
+                        currentPiece.length == 2 &&
+                                1 <= Integer.parseInt(currentPiece[1]) &&
+                                8 >= Integer.parseInt(currentPiece[1]) &&
+                                isInputPiecePositionIndex0RightRange(currentPiece[0])
+                ) {
+                    return currentPiece;
+                } else {
+                    System.out.println("● Please try again !");
+                }
 
-            if (
-                    currentPiece.length == 2 &&
-                            1 <= Integer.parseInt(currentPiece[1]) &&
-                            8 >= Integer.parseInt(currentPiece[1]) &&
-                            isInputPiecePositionIndex0RightRange(currentPiece[0])
-            ) {
-                return currentPiece;
-            } else {
+            } catch (Exception e) {
                 System.out.println("● Please try again !");
             }
-
         }
     }
 
     public String[] enterPutPiecePosition(Scanner scanner) {
         while (true) {
-            System.out.println(">>");
-            String[] currentPiece = scanner.nextLine().split("/");
-            if (
-                    currentPiece.length == 2 &&
-                            1 <= Integer.parseInt(currentPiece[1]) &&
-                            8 >= Integer.parseInt(currentPiece[1]) &&
-                            isInputPiecePositionIndex0RightRange(currentPiece[0])
-            ) {
-                return currentPiece;
-            } else {
+            try {
+                System.out.println(">>");
+                String[] currentPiece = scanner.nextLine().split("/");
+                if (
+                        currentPiece.length == 2 &&
+                                1 <= Integer.parseInt(currentPiece[1]) &&
+                                8 >= Integer.parseInt(currentPiece[1]) &&
+                                isInputPiecePositionIndex0RightRange(currentPiece[0])
+                ) {
+                    return currentPiece;
+                } else {
+                    System.out.println("● Please try again !");
+                }
+
+            } catch (Exception e) {
                 System.out.println("● Please try again !");
             }
         }

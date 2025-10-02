@@ -1,5 +1,6 @@
 package main;
 
+import Utils.ChangePieceIndexToChessPosition;
 import Utils.GetUserInput;
 import Utils.PrintLoadingString;
 import domain.Checkmate;
@@ -18,6 +19,7 @@ public class ChessGameApplication {
         Random random = new Random();
         ServiceChessGame serviceChessGame = new ServiceChessGame();
         Checkmate checkmate = new Checkmate();
+        ChangePieceIndexToChessPosition changePieceIndexToChessPosition = new ChangePieceIndexToChessPosition();
 
 
         Console console = new Console();
@@ -27,7 +29,8 @@ public class ChessGameApplication {
                 printLoadingString,
                 random,
                 serviceChessGame,
-                checkmate
+                checkmate,
+                changePieceIndexToChessPosition
         );
 
     }

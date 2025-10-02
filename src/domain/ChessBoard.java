@@ -311,7 +311,6 @@ public class ChessBoard {
             }
         }
         throw new RuntimeException("ChessBoard.java:313");
-        // throw 학습 후 진행!!!!!;
     }
 
 
@@ -1044,7 +1043,7 @@ public class ChessBoard {
             ChessPiece currentPiece
     ) {
 
-        // Queen, Rook, Bishop
+        // Queen, Rook, Bishop, Pawn
         if (currentPiece.getPieceType().equals("Queen")) {
             if (
                     checkPutPieceCanBePutOnLeftDirection(
@@ -1106,7 +1105,6 @@ public class ChessBoard {
             ) {
                 return true;
             } else {
-                System.out.println("● You can't put this Piece(%s) here !");
                 return false;
             }
 
@@ -1144,7 +1142,6 @@ public class ChessBoard {
             ) {
                 return true;
             } else {
-                System.out.println("● You can't put this Piece(%s) here !");
                 return false;
             }
 
@@ -1181,15 +1178,244 @@ public class ChessBoard {
             ) {
                 return true;
             } else {
-                System.out.println("● You can't put this Piece(%s) here !");
                 return false;
             }
 
+        } else if (currentPiece.getPieceType().equals("Pawn")) {
+
+            if (currentPiece.getColor().equals("White")) {
+                if (
+                    // When Pawn is located at the line2 or line7;
+                    // it can move 2 space;
+                        currentPiecePositionY.equals(1)
+                                || currentPiecePositionY.equals(6)
+                ) {
+
+                    if (
+                            currentPiecePositionX.equals(putPiecePositionX)
+                    ) {
+                        if (
+                                currentPiecePositionY - putPiecePositionY <= 2 &&
+                                        currentPiecePositionY - putPiecePositionY >= 1 &&
+                                        getPiece(
+                                                putPiecePositionX,
+                                                putPiecePositionY
+                                        ).getColor().equals("Empty")
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        // !currentPiecePositionX.equals(putPiecePositionX)
+                        if (
+                                (
+                                        (
+                                                putPiecePositionX.equals(currentPiecePositionX + 1) &&
+                                                        putPiecePositionY.equals(currentPiecePositionY - 1)
+                                        ) &&
+                                                (
+                                                        getPiece(
+                                                                currentPiecePositionX + 1,
+                                                                currentPiecePositionY - 1
+                                                        ).getColor().equals("Black")
+                                                )
+                                ) ||
+                                        (
+                                                (
+                                                        putPiecePositionX.equals(currentPiecePositionX - 1) &&
+                                                                putPiecePositionY.equals(currentPiecePositionY - 1)
+                                                ) &&
+                                                        (
+                                                                getPiece(
+                                                                        currentPiecePositionX - 1,
+                                                                        currentPiecePositionY - 1
+                                                                ).getColor().equals("Black")
+                                                        )
+                                        )
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                } else {
+                    // when Pawn is located at some line except line2 or line7;
+                    // it can move 1 space;
+                    if (
+                            currentPiecePositionX.equals(putPiecePositionX)
+                    ) {
+                        if (
+                                currentPiecePositionY - putPiecePositionY == 1 &&
+                                        getPiece(
+                                                putPiecePositionX,
+                                                putPiecePositionY
+                                        ).getColor().equals("Empty")
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        // !currentPiecePositionX.equals(putPiecePositionX)
+                        if (
+                                (
+                                        (
+                                                putPiecePositionX.equals(currentPiecePositionX + 1) &&
+                                                        putPiecePositionY.equals(currentPiecePositionY - 1)
+                                        ) &&
+                                                (
+                                                        getPiece(
+                                                                currentPiecePositionX + 1,
+                                                                currentPiecePositionY - 1
+                                                        ).getColor().equals("Black")
+                                                )
+                                ) ||
+                                        (
+                                                (
+                                                        putPiecePositionX.equals(currentPiecePositionX - 1) &&
+                                                                putPiecePositionY.equals(currentPiecePositionY - 1)
+                                                ) &&
+                                                        (
+                                                                getPiece(
+                                                                        currentPiecePositionX - 1,
+                                                                        currentPiecePositionY - 1
+                                                                ).getColor().equals("Black")
+                                                        )
+                                        )
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+
+            } else if (currentPiece.getColor().equals("Black")) {
+                if (
+                    // When Pawn is located at the line2 or line7;
+                    // it can move 2 space;
+                        currentPiecePositionY.equals(1)
+                                || currentPiecePositionY.equals(6)
+                ) {
+
+                    if (
+                            currentPiecePositionX.equals(putPiecePositionX)
+                    ) {
+                        if (
+                                putPiecePositionY - currentPiecePositionY <= 2  &&
+                                        putPiecePositionY - currentPiecePositionY >= 1 &&
+                                        getPiece(
+                                                putPiecePositionX,
+                                                putPiecePositionY
+                                        ).getColor().equals("Empty")
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        // !currentPiece.getCurrentPositionX().equals(putPiecePositionX)
+                        if (
+                                (
+                                        (
+                                                putPiecePositionX.equals(currentPiecePositionX + 1) &&
+                                                        putPiecePositionY.equals(currentPiecePositionY + 1)
+                                        ) &&
+                                                (
+                                                        getPiece(
+                                                                currentPiecePositionX + 1,
+                                                                currentPiecePositionY - 1
+                                                        ).getColor().equals("White")
+                                                )
+                                ) ||
+                                        (
+                                                (
+                                                        putPiecePositionX.equals(currentPiecePositionX - 1) &&
+                                                                putPiecePositionY.equals(currentPiecePositionY + 1)
+                                                ) &&
+                                                        (
+                                                                getPiece(
+                                                                        currentPiecePositionX - 1,
+                                                                        currentPiecePositionY - 1
+                                                                ).getColor().equals("White")
+                                                        )
+                                        )
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                } else {
+                    // when Pawn is located at some line except line2 or line7;
+                    // it can move 1 space;
+                    if (
+                            currentPiecePositionX.equals(putPiecePositionX)
+                    ) {
+                        if (
+                                putPiecePositionY - currentPiecePositionY == 1 &&
+                                        getPiece(
+                                                putPiecePositionX,
+                                                putPiecePositionY
+                                        ).getColor().equals("Empty")
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+
+                    } else {
+                        // !currentPiecePositionX.equals(putPiecePositionX)
+                        if (
+                                (
+                                        (
+                                                putPiecePositionX.equals(currentPiecePositionX + 1) &&
+                                                        putPiecePositionY.equals(currentPiecePositionY + 1)
+                                        ) &&
+                                                (
+                                                        getPiece(
+                                                                currentPiecePositionX + 1,
+                                                                currentPiecePositionY + 1
+                                                        ).getColor().equals("White")
+                                                )
+                                ) ||
+                                        (
+                                                (
+                                                        putPiecePositionX.equals(currentPiecePositionX - 1) &&
+                                                                putPiecePositionY.equals(currentPiecePositionY + 1)
+                                                ) &&
+                                                        (
+                                                                getPiece(
+                                                                        currentPiecePositionX - 1,
+                                                                        currentPiecePositionY + 1
+                                                                ).getColor().equals("White")
+                                                        )
+                                        )
+                        ) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+
+            } else {
+                // This means this piece's color is "Empty", but this will never happen!
+                throw new RuntimeException();
+            }
+
         } else {
-            System.out.println("ChessBoard.java:1189");
-            System.exit(1); // when currentPiece's type is not a one of Bishop and Queen, Rook;
+            System.out.println("ChessBoard.java:1418");
+            System.exit(1); // when currentPiece's type is not a one of "Bishop" and "Queen, "Rook";
             return null;
         }
+
     }
 
     public Boolean checkPutPieceCanBePutOnLeftDirection(
@@ -1693,12 +1919,7 @@ public class ChessBoard {
             Integer putPiecePositionX,
             Integer putPiecePositionY
     ) {
-        // 구현하기!!!!
-        // 다른 color의 Pawn, Queen, Rook, Bishop, Knight 이 capture할 수 있는 범위를 각각 구해야함!
-        // → 다른 color의 piece 각각 capture 할 수 있는 piece 리스트 만들어서, putPiecePosition이랑 비교......
-        // 리스트로 접근해야겠다.......
-        // ----------
-        // 일단은 놓는 위치(putPosition)에 same color piece가 위치하는지 판변하는 로직만 짜보자...!
+        // 놓는 위치(putPosition)에 same color piece가 위치하는지 판변하는 로직만 짬 ( king이 못놓는 위치인지는 확인 안 함.. )
         String putPieceColor = getPiece(
                 putPiecePositionX, putPiecePositionY
                 ).getColor();

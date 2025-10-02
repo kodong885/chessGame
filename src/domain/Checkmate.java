@@ -98,33 +98,43 @@ public class Checkmate {
             Integer xValueKingPieceCanMove,
             Integer yValueKingPieceCanMove
     ) {
-        ChessPiece otherColorPiece = null;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                if (
-                        chessBoard.chessBoard[i][j].getColor().equals(otherPieceColor)
-                ) {
-                    otherColorPiece = chessBoard.chessBoard[i][j];
+        if (
+                0 <= kingPiecePositionX + xValueKingPieceCanMove &&
+                        7 >= kingPiecePositionX + xValueKingPieceCanMove &&
+                        0 <= kingPiecePositionY + yValueKingPieceCanMove &&
+                        7 >= kingPiecePositionY + yValueKingPieceCanMove
+        ) {
+            ChessPiece otherColorPiece = null;
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
                     if (
-                            canOtherPieceCaptureKingPiece(
-                                    otherColorPiece.getCurrentPositionX(),
-                                    otherColorPiece.getCurrentPositionY(),
-                                    kingPiecePositionX + xValueKingPieceCanMove,
-                                    kingPiecePositionY + yValueKingPieceCanMove,
-                                    otherColorPiece,
-                                    chessBoard
-                            )
+                            chessBoard.chessBoard[i][j].getColor().equals(otherPieceColor)
                     ) {
-                        return true;
-                    } else {
+                        otherColorPiece = chessBoard.chessBoard[i][j];
+                        if (
+                                canOtherPieceCaptureKingPiece(
+                                        otherColorPiece.getCurrentPositionX(),
+                                        otherColorPiece.getCurrentPositionY(),
+                                        kingPiecePositionX + xValueKingPieceCanMove,
+                                        kingPiecePositionY + yValueKingPieceCanMove,
+                                        otherColorPiece,
+                                        chessBoard
+                                )
+                        ) {
+                            return true;
+                        } else {
+                            continue;
+                        }
+                    }  else {
                         continue;
                     }
-                }  else {
-                    continue;
                 }
             }
+            return false;
+        } else {
+            return false;
         }
-        return false;
+
     }
 
     public Boolean canOtherPieceCaptureKingPiece(
@@ -135,20 +145,56 @@ public class Checkmate {
             ChessPiece otherColorPiece,
             ChessBoard chessBoard
     ) {
-        if (
-                chessBoard.checkPutPieceCanBePutOnPutPiecePosition(
-                        otherColorPiecePositionX,
-                        otherColorPiecePositionY,
-                        putKingPiecePositionX,
-                        putKingPiecePositionY,
-                        otherColorPiece
-                )
-        ) {
-            return true;
-        } else {
-            System.out.println("이런... Checkmata.java:148");
-            return false;
+
+        switch (otherColorPiece.getPieceType()) {
+            case "Bishop":
+            case "Queen" :
+            case "Rook" :
+            case "Pawn" :
+                if (
+                        chessBoard.checkPutPieceCanBePutOnPutPiecePosition(
+                                otherColorPiecePositionX,
+                                otherColorPiecePositionY,
+                                putKingPiecePositionX,
+                                putKingPiecePositionY,
+                                otherColorPiece
+                        )
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            case "Knight" :
+                if (
+                        chessBoard.isKnightPieceCanBePutHere(
+                                otherColorPiecePositionX,
+                                otherColorPiecePositionY,
+                                putKingPiecePositionX,
+                                putKingPiecePositionY
+                        )
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            case "King" :
+                if (
+                        chessBoard.checkKingPieceCanPutHere(
+                                otherColorPiecePositionX,
+                                otherColorPiecePositionY,
+                                putKingPiecePositionX,
+                                putKingPiecePositionY
+                        )
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+
         }
+        throw new RuntimeException();
     }
 
 }
